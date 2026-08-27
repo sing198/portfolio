@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local sub-projects
+/Kanban-Board-main/
+/land/
