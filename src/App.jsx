@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 
 // Project screenshots
@@ -86,6 +87,7 @@ function App() {
 
   return (
     <>
+      <Analytics />
       {/* ============ FLOATING HEADER ============ */}
       <header className="header-wrapper">
         {/* Theme Toggle Button */}
