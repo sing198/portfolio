@@ -536,7 +536,7 @@ function App() {
                   <span className="traffic-dot traffic-red" />
                   <span className="traffic-dot traffic-yellow" />
                   <span className="traffic-dot traffic-green" />
-                  <span className="mac-url-bar">https://alro-land.gov.th</span>
+                  <span className="mac-url-bar">https://alro-land.vercel.app/</span>
                 </div>
                 <img
                   src={screenshots.land.admin}
@@ -560,7 +560,7 @@ function App() {
               </div>
               <div className="project-action-links">
                 <a
-                  href="https://github.com/sing198/land"
+                  href="https://alro-land.vercel.app/"
                   target="_blank"
                   rel="noreferrer"
                   className="btn-project-primary"
