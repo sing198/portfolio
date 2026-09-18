@@ -1,730 +1,119 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
-import './index.css'
 
-// Project screenshots
-const screenshots = {
-  dgkeys: {
-    homepage: 'https://raw.githubusercontent.com/sing198/OMS/main/screenshots/homepage.png',
-    cart: 'https://raw.githubusercontent.com/sing198/OMS/main/screenshots/cart.png',
-    admin: 'https://raw.githubusercontent.com/sing198/OMS/main/screenshots/AdminProducts.png',
-  },
-  kanban: {
-    board: 'https://raw.githubusercontent.com/sing198/Kanban-Board/main/screenshot/KanbanBoard.png',
-    dashboard: 'https://raw.githubusercontent.com/sing198/Kanban-Board/main/screenshot/KanbanDashboard.png',
-  },
-  land: {
-    admin: '/screenshots/land/Admin_Home_Right.png',
-    landOfficer: '/screenshots/land/Land Reform Officer_Home_Right.png',
-    legalOfficer: '/screenshots/land/Legal Officer Home_Right.png',
-  },
-}
-
-// Skills data for 3D Sphere & filter
-const SKILLS_DATA = [
-  { id: 'react', name: 'React', category: 'frontend', icon: '⚛️', color: '#61dafb', desc: 'Component architecture, hooks, state management, SPA routing' },
-  { id: 'golang', name: 'Golang', category: 'backend', icon: '🔷', color: '#00add8', desc: 'High-performance Gin framework, concurrency, GORM, REST APIs' },
-  { id: 'vue', name: 'Vue 3', category: 'frontend', icon: '💚', color: '#42b883', desc: 'Vue 3 Composition API, Pinia, Vue Router, Leaflet integration' },
-  { id: 'ts', name: 'TypeScript', category: 'frontend', icon: '📘', color: '#3178c6', desc: 'Type-safe frontend development, interfaces, strict mode' },
-  { id: 'postgres', name: 'PostgreSQL', category: 'database', icon: '🐘', color: '#336791', desc: 'Relational database, transactions, query optimization, ACID' },
-  { id: 'redis', name: 'Redis', category: 'database', icon: '🔴', color: '#dc382d', desc: 'Pub/Sub broadcasting, in-memory caching, message queues' },
-  { id: 'nodejs', name: 'Node.js', category: 'backend', icon: '🟢', color: '#68a063', desc: 'Express RESTful APIs, Joi validation, MariaDB pooling, JWT security' },
-  { id: 'docker', name: 'Docker', category: 'tools', icon: '🐳', color: '#2496ed', desc: 'Containerization, Docker Compose, multi-stage builds' },
-  { id: 'ws', name: 'WebSockets', category: 'backend', icon: '⚡', color: '#eab308', desc: 'Real-time bi-directional messaging, heartbeat, client presence' },
-  { id: 'tailwind', name: 'Tailwind', category: 'frontend', icon: '🎨', color: '#38bdf8', desc: 'Modern responsive utility-first styling, animations, dark mode' },
-  { id: 'git', name: 'Git', category: 'tools', icon: '🐙', color: '#f05032', desc: 'Version control, branch management, collaborative workflows' },
-  { id: 'leaflet', name: 'Leaflet GIS', category: 'frontend', icon: '🗺️', color: '#10b981', desc: 'Interactive geographic information system, polygon coordinate mapping' },
+const EMAIL = 'thanaphat3254@gmail.com'
+const GITHUB = 'https://github.com/sing198'
+const navigation = [['home', 'Home'], ['projects', 'Work'], ['about', 'Experience'], ['skills', 'Skills'], ['contact', 'Contact']]
+const projects = [
+  { name: 'DGKeys', type: 'E-commerce platform', number: '01', theme: 'peach', image: 'https://raw.githubusercontent.com/sing198/OMS/main/screenshots/homepage.png', description: 'A digital storefront built around a reliable checkout.', detail: 'A full-stack game key store with PostgreSQL transaction locking to prevent race conditions during checkout.', tags: ['React', 'Go / Gin', 'PostgreSQL', 'JWT'], demo: 'https://oms-lemon.vercel.app/', repo: 'OMS' },
+  { name: 'Kanban Board', type: 'Real-time collaboration', number: '02', theme: 'mint', image: '/screenshots/KanbanBoard.png', description: 'One workspace. Everyone on the same page.', detail: 'A collaborative board that syncs cards and swimlanes over WebSockets, with Redis Pub/Sub for communication across instances.', tags: ['React', 'TypeScript', 'Go', 'Redis'], demo: 'https://kanban-board-eta-five.vercel.app/', repo: 'Kanban-Board' },
+  { name: 'ALRO Land', type: 'GIS & land management', number: '03', theme: 'lilac', image: '/screenshots/land/Admin_Home_Right.png', description: 'Making complex land information easier to navigate.', detail: 'A land management application with interactive polygon mapping, analytics dashboards, role-based access, and privacy masking.', tags: ['Vue 3', 'Node.js', 'MariaDB', 'Leaflet'], demo: 'https://alro-land.vercel.app/', repo: 'land' },
 ]
+const skills = [
+  { category: 'Frontend', title: 'Interfaces that make sense.', stack: ['React', 'Vue 3', 'TypeScript', 'Tailwind CSS'], detail: 'Responsive interfaces, reusable components, and API integration.', mark: '01' },
+  { category: 'Backend', title: 'The logic behind the experience.', stack: ['Go / Gin', 'Node.js', 'Express', 'WebSockets'], detail: 'REST APIs, authentication, and real-time communication.', mark: '02' },
+  { category: 'Data & tools', title: 'A solid foundation.', stack: ['PostgreSQL', 'MariaDB', 'Redis', 'Docker', 'Git', 'Figma'], detail: 'Relational data, caching, development workflows, and interface design.', mark: '03' },
+]
+
+function Arrow({ diagonal = false }) {
+  return <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d={diagonal ? 'M6 18 18 6M6 6h12v12' : 'M4 12h15m-6-6 6 6-6 6'} /></svg>
+}
 
 function App() {
   const [activeNav, setActiveNav] = useState('home')
-  const [activeAboutTab, setActiveAboutTab] = useState('passion')
-  const [selectedSkillCategory, setSelectedSkillCategory] = useState('all')
-  const [activeSkill, setActiveSkill] = useState(SKILLS_DATA[0])
-  const [isDarkTheme, setIsDarkTheme] = useState(() => {
-    const saved = typeof window !== 'undefined' ? localStorage.getItem('portfolio-theme') : null
-    if (saved) return saved === 'dark'
-    return typeof window !== 'undefined' && window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)').matches : true
+  const [filter, setFilter] = useState('All')
+  const [isDark, setIsDark] = useState(() => {
+    try { return localStorage.getItem('portfolio-theme') === 'dark' } catch { return false }
   })
-
-  // Synchronize body class and localStorage on theme toggle
   useEffect(() => {
-    if (isDarkTheme) {
-      document.body.classList.remove('light-theme')
-      localStorage.setItem('portfolio-theme', 'dark')
-    } else {
-      document.body.classList.add('light-theme')
-      localStorage.setItem('portfolio-theme', 'light')
-    }
-  }, [isDarkTheme])
-
-  // Scroll spy to highlight active navbar item
+    document.body.classList.toggle('dark-theme', isDark)
+    document.body.classList.remove('light-theme')
+    try { localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light') } catch { /* The theme still works when storage is unavailable. */ }
+  }, [isDark])
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200
-      const sections = ['home', 'about', 'projects', 'skills', 'other']
-
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId)
-        if (el) {
-          const top = el.offsetTop
-          const height = el.offsetHeight
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveNav(sectionId)
-            break
-          }
-        }
+    const onScroll = () => {
+      let current = 'home'
+      for (const [id] of navigation) {
+        if (document.getElementById(id)?.getBoundingClientRect().top <= 160) current = id
       }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5) current = 'contact'
+      setActiveNav(current)
     }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const filteredSkills = selectedSkillCategory === 'all'
-    ? SKILLS_DATA
-    : SKILLS_DATA.filter((s) => s.category === selectedSkillCategory)
+  useEffect(() => {
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (!('IntersectionObserver' in window)) return
 
-  return (
-    <>
-      <Analytics />
-      {/* ============ FLOATING HEADER ============ */}
-      <header className="header-wrapper">
-        {/* Theme Toggle Button */}
-        <button
-          className="btn-circle"
-          onClick={() => setIsDarkTheme(!isDarkTheme)}
-          title="Toggle Theme"
-          aria-label="Toggle Theme"
-        >
-          {isDarkTheme ? '🌙' : '☀️'}
+    let observer
+    const setupReveals = () => {
+      observer?.disconnect()
+      if (motionPreference.matches) return
+      observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-in')
+            observer.unobserve(entry.target)
+          }
+        }
+      }, { threshold: 0.08 })
+      document.querySelectorAll('.section-heading, .project, .experience-intro, .experience, .contact-panel').forEach(element => {
+        if (!element.classList.contains('reveal-in')) observer.observe(element)
+      })
+    }
+    setupReveals()
+    motionPreference.addEventListener('change', setupReveals)
+    return () => {
+      observer?.disconnect()
+      motionPreference.removeEventListener('change', setupReveals)
+    }
+  }, [])
+
+  return <>
+    <Analytics />
+    <a className="skip-link" href="#main">Skip to content</a>
+    <header className="site-header">
+      <div className="header-inner">
+        <a className="wordmark" href="#home" aria-label="Thanaphat home">tk<span>.</span></a>
+        <nav aria-label="Main navigation">{navigation.map(([id, label]) => <a key={id} href={`#${id}`} className={activeNav === id ? 'active' : ''} aria-current={activeNav === id ? 'location' : undefined}>{label}</a>)}</nav>
+        <button className="theme-toggle" onClick={() => setIsDark(!isDark)} aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`} title={`Switch to ${isDark ? 'light' : 'dark'} theme`}>
+          <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">{isDark ? <><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></> : <path d="M20 15.5A9 9 0 0 1 8.5 4 9 9 0 1 0 20 15.5Z" />}</svg>
         </button>
-
-        {/* Floating Capsule Navbar */}
-        <nav className="nav-capsule">
-          <a
-            href="#home"
-            className={`nav-item ${activeNav === 'home' ? 'active' : ''}`}
-            onClick={() => setActiveNav('home')}
-          >
-            Home
-          </a>
-          <a
-            href="#about"
-            className={`nav-item ${activeNav === 'about' ? 'active' : ''}`}
-            onClick={() => setActiveNav('about')}
-          >
-            About
-          </a>
-          <a
-            href="#projects"
-            className={`nav-item ${activeNav === 'projects' ? 'active' : ''}`}
-            onClick={() => setActiveNav('projects')}
-          >
-            Projects
-          </a>
-          <a
-            href="#skills"
-            className={`nav-item ${activeNav === 'skills' ? 'active' : ''}`}
-            onClick={() => setActiveNav('skills')}
-          >
-            Skills
-          </a>
-          <a
-            href="#other"
-            className={`nav-item ${activeNav === 'other' ? 'active' : ''}`}
-            onClick={() => setActiveNav('other')}
-          >
-            Other
-          </a>
-        </nav>
-
-        {/* Right Spacer to keep capsule perfectly centered */}
-        <div style={{ width: 44, height: 44 }} />
-      </header>
-
-      {/* ============ 1. HERO SECTION ============ */}
-      <section className="hero-section main-container" id="home">
-        {/* Avatar Profile Photo */}
-        <div className="avatar-wrapper">
-          <div
-            className="avatar-3d-head"
-            style={{
-              padding: '4px',
-              background: 'linear-gradient(135deg, #ffc371, #ff5f6d)',
-              boxShadow: '0 20px 40px rgba(255, 95, 109, 0.35)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-            }}
-          >
-            <img
-              src="/profile.jpg"
-              alt="Thanaphat Khunphet"
-              style={{
-                width: '100%',
-                height: '100%',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                display: 'block',
-              }}
-            />
-          </div>
+      </div>
+    </header>
+    <main id="main">
+      <section className="hero container" id="home">
+        <div className="hero-copy">
+          <div className="availability"><span /> Open to opportunities</div>
+          <p className="eyebrow hero-intro">HELLO, I'M THANAPHAT KHUNPHET</p>
+          <h1>Thoughtful interfaces.<br /><span>Reliable systems.</span></h1>
+          <p className="hero-description">A full-stack developer connecting design and engineering. I build web applications with React, Go, and Node.js, with internship experience in ERP and healthcare.</p>
+          <div className="hero-actions"><a className="button primary" href="#projects">Explore my work <Arrow /></a><a className="button secondary" href="/Resume_Thanaphat_Khunphet.pdf" download="Resume_Thanaphat_Khunphet.pdf">Download Resume <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg></a></div>
+          <div className="hero-meta"><span>Based in Bangkok, Thailand</span><span className="meta-dot">·</span><a href={GITHUB} target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a></div>
         </div>
-
-        {/* Title */}
-        <h1 className="hero-heading">
-          Hi, I'm <span className="gradient-text">Thanaphat Khunphet</span>
-        </h1>
-
-        {/* Subtitle & Tagline */}
-        <p
-          style={{
-            maxWidth: '620px',
-            margin: '0 auto 2.2rem auto',
-            fontSize: '1.1rem',
-            color: 'var(--text-secondary)',
-            lineHeight: 1.7,
-          }}
-        >
-          Full-Stack Developer who builds clean, scalable web applications with modern technologies. Passionate about turning complex problems into elegant digital products.
-        </p>
-
-        {/* Call to Actions */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <a href="#projects" className="btn-project-primary" style={{ padding: '0.75rem 1.8rem', fontSize: '0.9rem' }}>
-            View Projects ↓
-          </a>
-          <a
-            href="https://github.com/sing198"
-            target="_blank"
-            rel="noreferrer"
-            className="btn-project-outline"
-            style={{ padding: '0.75rem 1.8rem', fontSize: '0.9rem' }}
-          >
-            GitHub Profile 🐙
-          </a>
-        </div>
-
-        {/* Scroll Indicator */}
-        <a href="#about" className="scroll-explore-indicator" style={{ marginTop: '4rem' }}>
-          <span>Scroll to explore</span>
-          <span>↓</span>
-        </a>
-      </section>
-
-      {/* ============ 2. ABOUT BENTO GRID (Image 2) ============ */}
-      <section className="section-spacing main-container" id="about">
-        <div className="bento-grid">
-          {/* Box 1: Name Badge */}
-          <div className="bento-card bento-name-badge">
-            <h3 className="name-badge-title">THANAPHAT KHUNPHET</h3>
-            <div className="name-badge-divider" />
-            <p className="name-badge-sub">FULLSTACK DEVELOPER</p>
-          </div>
-
-          {/* Box 2: Hover to Read More Tabs */}
-          <div className="bento-card bento-hover-tabs">
-            <div className="hover-header-label">HOVER TO READ MORE</div>
-            <div className="hover-tabs-grid">
-              <div
-                className={`hover-tab-item ${activeAboutTab === 'passion' ? 'active' : ''}`}
-                onMouseEnter={() => setActiveAboutTab('passion')}
-              >
-                <div className="tab-category-label">TECH PASSION</div>
-                <div className="tab-snippet-text">
-                  Passionate about high-concurrency Go services & modern reactive React interfaces.
-                </div>
-              </div>
-              <div
-                className={`hover-tab-item ${activeAboutTab === 'engineering' ? 'active' : ''}`}
-                onMouseEnter={() => setActiveAboutTab('engineering')}
-              >
-                <div className="tab-category-label">ENGINEERING</div>
-                <div className="tab-snippet-text">
-                  Architecting robust REST & WebSocket APIs backed by PostgreSQL and Redis pub/sub.
-                </div>
-              </div>
-              <div
-                className={`hover-tab-item ${activeAboutTab === 'focus' ? 'active' : ''}`}
-                onMouseEnter={() => setActiveAboutTab('focus')}
-              >
-                <div className="tab-category-label">FOCUS</div>
-                <div className="tab-snippet-text">
-                  Writing clean, scalable code with end-to-end security, RBAC, and reliable deployments.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Box 3: Mindset */}
-          <div className="bento-card bento-mindset">
-            <div>
-              <h3 className="card-heading-clean">Mindset</h3>
-              <p className="mindset-lead">
-                <strong>Building more than software.</strong> My passions provide the <strong>discipline and focus</strong> I need to grow.
-              </p>
-            </div>
-
-            {/* Polaroid style graphic */}
-            <div className="polaroid-badge">
-              <div
-                className="polaroid-img"
-                style={{
-                  background: 'linear-gradient(135deg, #1e3c72, #2a5298)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '2.5rem',
-                }}
-              >
-                🏄‍♂️ 💻
-              </div>
-              <div className="polaroid-tag">FOCUS & FLOW</div>
-            </div>
-
-            <p className="mindset-footer">
-              Mastering body and mind is my path to <strong>excellence</strong>.
-            </p>
-          </div>
-
-          {/* Box 4: Portrait Photo */}
-          <div className="bento-card bento-portrait">
-            <div
-              className="portrait-full-img"
-              style={{
-                background: 'linear-gradient(145deg, #1a162b, #282343)',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '2rem',
-                textAlign: 'center',
-              }}
-            >
-              <div
-                style={{
-                  width: '128px',
-                  height: '128px',
-                  borderRadius: '50%',
-                  padding: '3px',
-                  background: 'linear-gradient(135deg, #a855f7, #ec4899)',
-                  boxShadow: '0 8px 25px rgba(236, 72, 153, 0.35)',
-                  marginBottom: '1rem',
-                  overflow: 'hidden',
-                }}
-              >
-                <img
-                  src="/profile.jpg"
-                  alt="Thanaphat Khunphet"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: '50%',
-                    objectFit: 'cover',
-                    objectPosition: 'center top',
-                    display: 'block',
-                  }}
-                />
-              </div>
-              <h4 style={{ color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.25rem' }}>
-                Thanaphat
-              </h4>
-              <p style={{ color: 'var(--accent-purple)', fontSize: '0.8rem', fontWeight: 600 }}>
-                Full-Stack Developer
-              </p>
-            </div>
-          </div>
-
-          {/* Box 5: Craft */}
-          <div className="bento-card bento-craft">
-            <div>
-              <h3 className="card-heading-clean">Craft</h3>
-              <p className="craft-desc">
-                Building scalable <strong>apps, websites, and automations</strong>.
-              </p>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.25rem', lineHeight: '1.6' }}>
-                I understand what advantages modern tech can provide, helping me advise on the solutions a business actually needs.
-              </p>
-            </div>
-
-            {/* Tech strip */}
-            <div className="tech-icon-strip">
-              <span className="tech-strip-item">🎨 TAILWIND</span>
-              <span className="tech-strip-item">🐳 DOCKER</span>
-              <span className="tech-strip-item">🐙 GIT</span>
-              <span className="tech-strip-item">⚛️ REACT</span>
-              <span className="tech-strip-item">🔷 GOLANG</span>
-              <span className="tech-strip-item">🐘 POSTGRES</span>
-            </div>
-
-            <div>
-              <p className="craft-subtext">
-                Active Full-Stack Developer & Problem Solver. Available for Contract & Full-time opportunities. Feel free to reach out.
-              </p>
-              <div className="status-badge-open">
-                <span className="status-dot-pulse" />
-                Contract Or Full-time
-              </div>
-            </div>
-          </div>
-
-          {/* Box 6: Location Card */}
-          <div className="bento-card bento-location">
-            <h4 className="location-name">BANGKOK, THAILAND</h4>
-            <div className="location-coords">
-              13.7563° N, 100.5018° E <span>- GMT+7</span>
-            </div>
-          </div>
+        <div className="portrait-composition">
+          <div className="portrait-frame"><img src="/profile.jpg" alt="Thanaphat Khunphet" fetchPriority="high" /><div className="portrait-caption"><span>Thanaphat Khunphet</span><small>Full-Stack Developer</small></div></div>
         </div>
       </section>
-
-      {/* ============ 3. FEATURED PROJECTS (Images 3 & 4) ============ */}
-      <section className="section-spacing main-container" id="projects">
-        <div className="section-header-centered">
-          <p className="section-pill-tag">PORTFOLIO</p>
-          <h2 className="section-title-large">
-            Featured <span className="gradient-text">Projects</span>
-          </h2>
-          <p className="section-subtitle-muted">
-            A curated selection of projects that made me confident in building software.
-          </p>
-        </div>
-
-        {/* 2-Column Responsive Project Grid */}
-        <div className="projects-two-column-grid">
-          {/* Project 1: DGKeys */}
-          <div className="project-column-item">
-            <div className="project-meta-header">
-              <span className="project-index-num">01</span>
-              <span className="project-category-line">—— FULL-STACK E-COMMERCE</span>
-            </div>
-            <h3 className="project-item-title">DGKeys</h3>
-
-            {/* Vibrant Orange Box */}
-            <div className="project-vibrant-box box-theme-orange">
-              <p className="project-box-desc">
-                Production-grade full-stack e-commerce platform for digital game keys with PostgreSQL transaction locking to prevent race conditions during checkout.
-              </p>
-
-              {/* Mac Window Mockup */}
-              <div className="mac-window-mockup">
-                <div className="mac-title-bar">
-                  <span className="traffic-dot traffic-red" />
-                  <span className="traffic-dot traffic-yellow" />
-                  <span className="traffic-dot traffic-green" />
-                  <span className="mac-url-bar">https://oms-lemon.vercel.app/</span>
-                </div>
-                <img
-                  src={screenshots.dgkeys.homepage}
-                  alt="DGKeys Preview"
-                  className="mac-content-img"
-                />
-              </div>
-            </div>
-
-            {/* Details & Actions Below */}
-            <div className="project-footer-details">
-              <div className="project-pill-tags">
-                <span className="project-pill-tag">REACT</span>
-                <span className="project-pill-tag">GOLANG</span>
-                <span className="project-pill-tag">GIN</span>
-                <span className="project-pill-tag">POSTGRESQL</span>
-                <span className="project-pill-tag">GORM</span>
-                <span className="project-pill-tag">JWT</span>
-              </div>
-              <div className="project-action-links">
-                <a
-                  href="https://oms-lemon.vercel.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-project-primary"
-                >
-                  Live Demo ↗
-                </a>
-                <a
-                  href="https://github.com/sing198/OMS"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-project-outline"
-                >
-                  View on GitHub →
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 2: Kanban Board */}
-          <div className="project-column-item">
-            <div className="project-meta-header">
-              <span className="project-index-num">02</span>
-              <span className="project-category-line">—— REAL-TIME COLLABORATION</span>
-            </div>
-            <h3 className="project-item-title">Kanban Board</h3>
-
-            {/* Vibrant Green Box */}
-            <div className="project-vibrant-box box-theme-green">
-              <p className="project-box-desc">
-                Real-time collaborative kanban board workspace syncing cards and swimlanes over WebSockets with Redis Pub/Sub cross-instance scalability.
-              </p>
-
-              {/* Mac Window Mockup */}
-              <div className="mac-window-mockup">
-                <div className="mac-title-bar">
-                  <span className="traffic-dot traffic-red" />
-                  <span className="traffic-dot traffic-yellow" />
-                  <span className="traffic-dot traffic-green" />
-                  <span className="mac-url-bar">https://kanban-board-eta-five.vercel.app/</span>
-                </div>
-                <img
-                  src={screenshots.kanban.board}
-                  alt="Kanban Board Preview"
-                  className="mac-content-img"
-                />
-              </div>
-            </div>
-
-            {/* Details & Actions Below */}
-            <div className="project-footer-details">
-              <div className="project-pill-tags">
-                <span className="project-pill-tag">REACT 19</span>
-                <span className="project-pill-tag">TYPESCRIPT</span>
-                <span className="project-pill-tag">GOLANG</span>
-                <span className="project-pill-tag">WEBSOCKETS</span>
-                <span className="project-pill-tag">REDIS</span>
-                <span className="project-pill-tag">DOCKER</span>
-              </div>
-              <div className="project-action-links">
-                <a
-                  href="https://kanban-board-eta-five.vercel.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-project-primary"
-                >
-                  Live Demo ↗
-                </a>
-                <a
-                  href="https://github.com/sing198/Kanban-Board"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-project-outline"
-                >
-                  View on GitHub →
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Project 3: ALRO Land */}
-          <div className="project-column-item">
-            <div className="project-meta-header">
-              <span className="project-index-num">03</span>
-              <span className="project-category-line">—— GIS & ENTERPRISE WEB APP</span>
-            </div>
-            <h3 className="project-item-title">ALRO Land</h3>
-
-            {/* Vibrant Yellow Box */}
-            <div className="project-vibrant-box box-theme-yellow">
-              <p className="project-box-desc">
-                Enterprise GIS mapping & citizen land rights management system for ALRO (ส.ป.ก.). Features interactive Leaflet polygon plots, real-time analytics dashboard, 4-tier RBAC, and PDPA privacy masking.
-              </p>
-
-              {/* Mac Window Mockup */}
-              <div className="mac-window-mockup">
-                <div className="mac-title-bar">
-                  <span className="traffic-dot traffic-red" />
-                  <span className="traffic-dot traffic-yellow" />
-                  <span className="traffic-dot traffic-green" />
-                  <span className="mac-url-bar">https://alro-land.vercel.app/</span>
-                </div>
-                <img
-                  src={screenshots.land.admin}
-                  alt="ALRO Land Dashboard Preview"
-                  className="mac-content-img"
-                />
-              </div>
-            </div>
-
-            {/* Details & Actions Below */}
-            <div className="project-footer-details">
-              <div className="project-pill-tags">
-                <span className="project-pill-tag">VUE 3</span>
-                <span className="project-pill-tag">TAILWIND CSS</span>
-                <span className="project-pill-tag">LEAFLET GIS</span>
-                <span className="project-pill-tag">NODE.JS</span>
-                <span className="project-pill-tag">EXPRESS</span>
-                <span className="project-pill-tag">MARIADB</span>
-                <span className="project-pill-tag">CHART.JS</span>
-                <span className="project-pill-tag">DOCKER</span>
-              </div>
-              <div className="project-action-links">
-                <a
-                  href="https://alro-land.vercel.app/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-project-primary"
-                >
-                  Live Demo ↗
-                </a>
-                <a
-                  href="https://github.com/sing198/land"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-project-outline"
-                >
-                  View on GitHub →
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="expertise-strip"><div className="container"><span>DESIGN → DEVELOPMENT</span><p>React <i>/</i> Go <i>/</i> Node.js <i>/</i> PostgreSQL <i>/</i> Figma</p><a href="#projects" aria-label="Scroll to selected work">↓</a></div></div>
+      <section className="section container" id="projects">
+        <div className="section-heading"><div><p className="eyebrow">01 / SELECTED WORK</p><h2>Ideas, made tangible<span>.</span></h2></div><p>A few projects that show<br />how I approach building software.</p></div>
+        <div className="project-list">{projects.map(project => <article className="project" key={project.name}>
+          <a className={`project-visual ${project.theme}`} href={project.demo} target="_blank" rel="noreferrer" aria-label={`Open ${project.name} live demo`}><div className="visual-label"><span>{project.type}</span><Arrow diagonal /></div><div className="browser-frame"><div className="browser-chrome"><span /><span /><span /><small>{project.name}</small></div><img src={project.image} alt={`${project.name} application screenshot`} loading="lazy" /></div></a>
+          <div className="project-copy"><span className="project-number">PROJECT / {project.number}</span><h3>{project.name}</h3><p className="project-lead">{project.description}</p><p className="project-detail">{project.detail}</p><ul className="tags" aria-label="Tech stack">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul><div className="project-links"><a href={project.demo} target="_blank" rel="noreferrer">Live demo <Arrow diagonal /></a><a href={`${GITHUB}/${project.repo}`} target="_blank" rel="noreferrer">Source code <Arrow /></a></div></div>
+        </article>)}</div>
       </section>
-
-      {/* ============ 4. TECH STACK & SKILLS (Image 5) ============ */}
-      <section className="section-spacing main-container" id="skills">
-        <div className="section-header-centered">
-          <p className="section-pill-tag">TECH STACK</p>
-          <h2 className="section-title-large">
-            My <span className="gradient-text">Skills</span>
-          </h2>
-          <p className="section-subtitle-muted">
-            Hover or click on technologies to explore my toolkit and expertise.
-          </p>
-        </div>
-
-        {/* 3D Orbit Sphere Visual */}
-        <div className="skills-sphere-wrapper">
-          <div className="skills-wireframe-globe" />
-
-          {/* Center Active Node */}
-          <div
-            className="skill-core-center"
-            style={{
-              borderColor: activeSkill.color,
-              boxShadow: `0 0 45px ${activeSkill.color}55`,
-            }}
-          >
-            <span className="skill-core-icon">{activeSkill.icon}</span>
-            <span className="skill-core-name">{activeSkill.name}</span>
-          </div>
-
-          {/* Orbiting Satellite Nodes */}
-          {filteredSkills.map((skill, index) => {
-            if (skill.id === activeSkill.id) return null
-            const total = filteredSkills.length - 1 || 1
-            const angle = (index * (360 / total) * Math.PI) / 180
-            const radius = 175
-            const posX = Math.cos(angle) * radius
-            const posY = Math.sin(angle) * (radius * 0.7)
-
-            return (
-              <div
-                key={skill.id}
-                className="skill-orbit-node"
-                style={{
-                  transform: `translate(${posX}px, ${posY}px)`,
-                  borderColor: `${skill.color}40`,
-                }}
-                onMouseEnter={() => setActiveSkill(skill)}
-                onClick={() => setActiveSkill(skill)}
-              >
-                <span className="skill-node-icon">{skill.icon}</span>
-                <span className="skill-node-label">{skill.name}</span>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Active Skill Description Card */}
-        <div
-          style={{
-            maxWidth: '520px',
-            margin: '1.5rem auto 0 auto',
-            background: 'rgba(15, 14, 26, 0.75)',
-            backdropFilter: 'blur(16px)',
-            border: '1px solid var(--border-subtle)',
-            borderRadius: '20px',
-            padding: '1.25rem 1.75rem',
-            textAlign: 'center',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
-            <span style={{ fontSize: '1.4rem' }}>{activeSkill.icon}</span>
-            <h4 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>{activeSkill.name}</h4>
-            <span
-              style={{
-                fontSize: '0.68rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                padding: '0.2rem 0.6rem',
-                borderRadius: '9999px',
-                background: 'rgba(255, 255, 255, 0.08)',
-                color: 'var(--text-secondary)',
-              }}
-            >
-              {activeSkill.category}
-            </span>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.55' }}>
-            {activeSkill.desc}
-          </p>
-        </div>
-
-        {/* Category Filters */}
-        <div className="skills-filter-container">
-          {['all', 'frontend', 'backend', 'database', 'tools'].map((cat) => (
-            <button
-              key={cat}
-              className={`skills-filter-pill ${selectedSkillCategory === cat ? 'active' : ''}`}
-              onClick={() => setSelectedSkillCategory(cat)}
-            >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* ============ 5. OTHER / CONTACT SECTION ============ */}
-      <section className="section-spacing main-container" id="other">
-        <div className="section-header-centered">
-          <p className="section-pill-tag">CONNECT</p>
-          <h2 className="section-title-large">
-            Let's <span className="gradient-text">Work Together</span>
-          </h2>
-          <p className="section-subtitle-muted">
-            I'm currently available for full-time software engineering roles, contract work, and innovative collaborations.
-          </p>
-        </div>
-
-        <div style={{ maxWidth: '540px', margin: '0 auto' }}>
-          <div className="contact-options-grid">
-            <a href="mailto:sing2019083@gmail.com" className="contact-direct-card">
-              <span className="contact-card-icon">✉️</span>
-              <div className="contact-card-info">
-                <h4>Email Directly</h4>
-                <p>thanaphat3254@gmail.com</p>
-              </div>
-            </a>
-            <a href="https://github.com/sing198" target="_blank" rel="noreferrer" className="contact-direct-card">
-              <span className="contact-card-icon">🐙</span>
-              <div className="contact-card-info">
-                <h4>GitHub Profile</h4>
-                <p>github.com/sing198</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ FOOTER ============ */}
-      <footer className="site-footer">
-        <p>© 2026 Thanaphat Khunphet. Designed with modern aesthetics.</p>
-      </footer>
-    </>
-  )
+      <section className="experience-section" id="about"><div className="container experience-layout"><div className="experience-intro"><p className="eyebrow">02 / EXPERIENCE & BACKGROUND</p><h2>Learning by<br /><span>building.</span></h2><p>From enterprise workflows to healthcare interfaces, my internships gave me experience turning requirements into working software.</p><div className="education"><span className="education-icon" aria-hidden="true">↗</span><div><strong>Walailak University</strong><p>IT & Digital Innovation<br />2021–2025 · GPA 3.18</p></div></div></div><div className="timeline">
+        <article className="experience"><div className="experience-date">AUG — NOV 2025 <span>INTERNSHIP</span></div><h3>Front-End Developer</h3><p className="company">GIS GROUP Co., Ltd.</p><ul><li>Designed UI/UX and wireframes in Figma for a sports medicine clinic system.</li><li>Gathered requirements and refined designs based on client feedback.</li><li>Worked with React, Tailwind CSS, and shadcn/ui for clinic interfaces.</li></ul></article>
+        <article className="experience"><div className="experience-date">APR — AUG 2025 <span>INTERNSHIP</span></div><h3>Software Developer</h3><p className="company">Proalpha Solutions Thailand Co., Ltd.</p><ul><li>Learned Progress ABL and database queries within an enterprise ERP system.</li><li>Worked with Sales and Purchase modules, business logic, and UI modifications.</li><li>Practiced implementation, testing, and code review with senior developers.</li></ul></article>
+      </div></div></section>
+      <section className="section container" id="skills"><div className="section-heading"><div><p className="eyebrow">03 / MY TOOLKIT</p><h2>The tools behind the work<span>.</span></h2></div></div><div className="skill-filters" aria-label="Filter skills">{['All', ...skills.map(s => s.category)].map(category => <button key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{category}</button>)}</div><div className="skill-grid" key={filter}>{skills.filter(s => filter === 'All' || s.category === filter).map(skill => <article className="skill-card" key={skill.category}><div className="skill-top"><span>{skill.category}</span><span>{skill.mark}</span></div><h3>{skill.title}</h3><p>{skill.detail}</p><ul className="tags">{skill.stack.map(tech => <li key={tech}>{tech}</li>)}</ul></article>)}</div></section>
+      <section className="contact-section container" id="contact"><div className="contact-panel"><div><p className="eyebrow">HAVE A ROLE OR PROJECT IN MIND?</p><h2>Let’s build something<br /><span>worth using.</span></h2><p>Open to full-time roles and contract opportunities.</p><a className="button primary" href={`mailto:${EMAIL}`}>Get in touch <Arrow diagonal /></a></div><div className="contact-details"><span className="contact-star" aria-hidden="true">✳</span><a href={`mailto:${EMAIL}`}>{EMAIL} <Arrow diagonal /></a><a href={GITHUB} target="_blank" rel="noreferrer">Find me on GitHub <Arrow diagonal /></a><span>Bangkok, Thailand · UTC+7</span></div></div></section>
+    </main>
+    <footer className="container site-footer"><a className="wordmark" href="#home">tk<span>.</span></a><p>© {new Date().getFullYear()} Thanaphat Khunphet</p><a href="#home">Back to top ↑</a></footer>
+  </>
 }
-
 export default App
