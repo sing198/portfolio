@@ -968,3 +968,21 @@ h2 {
   .theme-toggle:hover svg { transform: rotate(-18deg); }
   .skill-filters button:hover { border-color: var(--accent); }
 }
+
+.skill-ai-note {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.skill-ai-note h4 {
+  margin: 0 0 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+.skill-ai-note p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
