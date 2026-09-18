@@ -1,0 +1,321 @@
+export const EMAIL = 'thanaphat3254@gmail.com'
+export const GITHUB = 'https://github.com/sing198'
+
+export const translations = {
+  en: {
+    skipLink: 'Skip to content',
+    nav: [
+      ['home', 'Home'],
+      ['projects', 'Work'],
+      ['about', 'Experience'],
+      ['skills', 'Skills'],
+      ['contact', 'Contact'],
+    ],
+    hero: {
+      availability: 'Open to opportunities',
+      eyebrow: "HELLO, I'M THANAPHAT KHUNPHET",
+      headlineLead: 'Full-Stack Developer.',
+      headlineSub: 'From design to code.',
+      description:
+        'A full-stack developer connecting design and engineering. I build web applications with React, Go, and Node.js, with internship experience in ERP and healthcare.',
+      exploreBtn: 'Explore my work',
+      resumeBtn: 'Download Resume',
+      location: 'Based in Bangkok, Thailand',
+      role: 'Full-Stack Developer',
+      name: 'Thanaphat Khunphet',
+    },
+    strip: {
+      tag: 'DESIGN → DEVELOPMENT',
+      stack: 'React / Go / Node.js / PostgreSQL / Figma',
+      aria: 'Scroll to selected work',
+    },
+    projectsSection: {
+      eyebrow: '01 / SELECTED WORK',
+      heading: 'Ideas, made tangible',
+      subheading: 'A few projects that show how I approach building software.',
+      liveDemo: 'Live demo',
+      sourceCode: 'Source code',
+      techStackAria: 'Tech stack',
+    },
+    projects: [
+      {
+        name: 'DGKeys',
+        type: 'E-commerce platform',
+        number: '01',
+        theme: 'peach',
+        image: '/screenshots/dgkeys.png',
+        description: 'A digital storefront built around a reliable checkout.',
+        detail:
+          'A full-stack game key store with PostgreSQL transaction locking to prevent race conditions during checkout.',
+        tags: ['React', 'Go / Gin', 'PostgreSQL', 'JWT'],
+        demo: 'https://oms-lemon.vercel.app/',
+        repo: 'OMS',
+      },
+      {
+        name: 'Kanban Board',
+        type: 'Real-time collaboration',
+        number: '02',
+        theme: 'mint',
+        image: '/screenshots/KanbanBoard.png',
+        description: 'One workspace. Everyone on the same page.',
+        detail:
+          'A collaborative board that syncs cards and swimlanes over WebSockets, with Redis Pub/Sub for communication across instances.',
+        tags: ['React', 'TypeScript', 'Go', 'Redis'],
+        demo: 'https://kanban-board-eta-five.vercel.app/',
+        repo: 'Kanban-Board',
+      },
+      {
+        name: 'ALRO Land',
+        type: 'GIS & land management',
+        number: '03',
+        theme: 'lilac',
+        image: '/screenshots/land/Admin_Home_Right.png',
+        description: 'Making complex land information easier to navigate.',
+        detail:
+          'A land management application with interactive polygon mapping, analytics dashboards, role-based access, and privacy masking.',
+        tags: ['Vue 3', 'Node.js', 'MariaDB', 'Leaflet'],
+        demo: 'https://alro-land.vercel.app/',
+        repo: 'land',
+      },
+    ],
+    experienceSection: {
+      eyebrow: '02 / EXPERIENCE & BACKGROUND',
+      heading: 'Learning by',
+      headingHighlight: 'building.',
+      intro:
+        'From enterprise workflows to healthcare interfaces, my internships gave me experience turning requirements into working software.',
+      education: {
+        school: 'Walailak University',
+        major: 'IT & Digital Innovation',
+        period: '2021–2025 · GPA 3.18',
+      },
+      timeline: [
+        {
+          date: 'AUG — NOV 2025',
+          badge: 'INTERNSHIP',
+          role: 'Front-End Developer',
+          company: 'GIS GROUP Co., Ltd.',
+          bullets: [
+            'Designed UI/UX and wireframes in Figma for a sports medicine clinic system.',
+            'Gathered requirements and refined designs based on client feedback.',
+            'Worked with React, Tailwind CSS, and shadcn/ui for clinic interfaces.',
+          ],
+        },
+        {
+          date: 'APR — AUG 2025',
+          badge: 'INTERNSHIP',
+          role: 'Software Developer',
+          company: 'Proalpha Solutions Thailand Co., Ltd.',
+          bullets: [
+            'Learned Progress ABL and database queries within an enterprise ERP system.',
+            'Worked with Sales and Purchase modules, business logic, and UI modifications.',
+            'Practiced implementation, testing, and code review with senior developers.',
+          ],
+        },
+      ],
+    },
+    skillsSection: {
+      eyebrow: '03 / MY TOOLKIT',
+      heading: 'The tools behind the work',
+      allFilter: 'All',
+      skills: [
+        {
+          category: 'Frontend',
+          title: 'Interfaces that make sense.',
+          stack: ['React', 'Vue 3', 'TypeScript', 'Tailwind CSS'],
+          detail: 'Responsive interfaces, reusable components, and API integration.',
+          mark: '01',
+        },
+        {
+          category: 'Backend',
+          title: 'The logic behind the experience.',
+          stack: ['Go / Gin', 'Node.js', 'Express', 'WebSockets'],
+          detail: 'REST APIs, authentication, and real-time communication.',
+          mark: '02',
+        },
+        {
+          category: 'Data & tools',
+          title: 'A solid foundation.',
+          stack: ['PostgreSQL', 'MariaDB', 'Redis', 'Docker', 'Git', 'Figma'],
+          aiTools: ['Codex', 'Antigravity'],
+          aiTitle: 'AI-assisted development',
+          aiNote:
+            'Using AI coding agents to explore code, assist with implementation, and investigate bugs.',
+          detail: 'Relational data, caching, development workflows, and interface design.',
+          mark: '03',
+        },
+      ],
+    },
+    contactSection: {
+      eyebrow: 'HAVE A ROLE OR PROJECT IN MIND?',
+      heading: 'Let’s build something',
+      headingHighlight: 'worth using.',
+      description: 'Open to full-time roles and contract opportunities.',
+      button: 'Get in touch',
+      location: 'Bangkok, Thailand · UTC+7',
+      githubLinkText: 'Find me on GitHub',
+    },
+    footer: {
+      copyright: `© ${new Date().getFullYear()} Thanaphat Khunphet`,
+      backToTop: 'Back to top ↑',
+    },
+  },
+  th: {
+    skipLink: 'ข้ามไปยังเนื้อหาหลัก',
+    nav: [
+      ['home', 'หน้าแรก'],
+      ['projects', 'ผลงาน'],
+      ['about', 'ประสบการณ์'],
+      ['skills', 'ทักษะ'],
+      ['contact', 'ติดต่อ'],
+    ],
+    hero: {
+      availability: 'พร้อมเริ่มงานทันที',
+      eyebrow: 'สวัสดีครับ ผม ธนภัทร ขุนเพ็ชร',
+      headlineLead: 'Full-Stack Developer.',
+      headlineSub: 'จากดีไซน์สู่โค้ดจริง',
+      description:
+        'Full-stack developer ที่เชื่อมโยงระหว่างการออกแบบและวิศวกรรมซอฟต์แวร์ พัฒนาเว็บแอปพลิเคชันด้วย React, Go และ Node.js พร้อมประสบการณ์ฝึกงานทั้งระบบ ERP ระดับองค์กรและระบบการแพทย์',
+      exploreBtn: 'ดูผลงานของผม',
+      resumeBtn: 'ดาวน์โหลดเรซูเม่ (ภาษาอังกฤษ)',
+      location: 'กรุงเทพฯ, ประเทศไทย',
+      role: 'Full-Stack Developer',
+      name: 'ธนภัทร ขุนเพ็ชร',
+    },
+    strip: {
+      tag: 'DESIGN → DEVELOPMENT',
+      stack: 'React / Go / Node.js / PostgreSQL / Figma',
+      aria: 'เลื่อนไปยังผลงานคัดสรร',
+    },
+    projectsSection: {
+      eyebrow: '01 / ผลงานคัดสรร',
+      heading: 'เปลี่ยนไอเดีย ให้เป็นผลงานจริง',
+      subheading: 'ผลงานที่สะท้อนแนวทางการคิด การออกแบบ และการพัฒนาซอฟต์แวร์ของผม',
+      liveDemo: 'Live demo',
+      sourceCode: 'Source code',
+      techStackAria: 'Tech stack',
+    },
+    projects: [
+      {
+        name: 'DGKeys',
+        type: 'E-commerce platform',
+        number: '01',
+        theme: 'peach',
+        image: '/screenshots/dgkeys.png',
+        description: 'ระบบร้านค้าดิจิทัลที่เน้นความแม่นยำและเสถียรภาพในการสั่งซื้อ',
+        detail:
+          'ระบบร้านขายคีย์เกมแบบ Full-stack ใช้ PostgreSQL transaction locking เพื่อป้องกันปัญหา Race Condition และสต็อกผิดพลาดระหว่าง Checkout',
+        tags: ['React', 'Go / Gin', 'PostgreSQL', 'JWT'],
+        demo: 'https://oms-lemon.vercel.app/',
+        repo: 'OMS',
+      },
+      {
+        name: 'Kanban Board',
+        type: 'Real-time collaboration',
+        number: '02',
+        theme: 'mint',
+        image: '/screenshots/KanbanBoard.png',
+        description: 'พื้นที่ทำงานร่วมกันแบบเรียลไทม์ ซิงค์ข้อมูลตรงกันทุกคน',
+        detail:
+          'กระดานจัดการงานร่วมกันแบบเรียลไทม์ ซิงค์สถานะการ์ดและ Swimlane ผ่าน WebSockets พร้อมใช้ Redis Pub/Sub กระจายข้อมูลระหว่าง Instance',
+        tags: ['React', 'TypeScript', 'Go', 'Redis'],
+        demo: 'https://kanban-board-eta-five.vercel.app/',
+        repo: 'Kanban-Board',
+      },
+      {
+        name: 'ALRO Land',
+        type: 'GIS & land management',
+        number: '03',
+        theme: 'lilac',
+        image: '/screenshots/land/Admin_Home_Right.png',
+        description: 'จัดการและแสดงผลข้อมูลที่ดินที่ซับซ้อนให้เข้าใจง่ายและใช้งานได้จริง',
+        detail:
+          'ระบบบริหารจัดการข้อมูลที่ดินด้วยแผนที่ Polygon แบบโต้ตอบ แสดงผล Dashboard วิเคราะห์ข้อมูล จัดการสิทธิ์ผู้ใช้งาน (RBAC) และการปกปิดข้อมูลส่วนบุคคล (Privacy Masking)',
+        tags: ['Vue 3', 'Node.js', 'MariaDB', 'Leaflet'],
+        demo: 'https://alro-land.vercel.app/',
+        repo: 'land',
+      },
+    ],
+    experienceSection: {
+      eyebrow: '02 / ประสบการณ์และการศึกษา',
+      heading: 'เรียนรู้จาก',
+      headingHighlight: 'การลงมือสร้างจริง.',
+      intro:
+        'จากเวิร์กโฟลว์ระดับองค์กรสู่อินเทอร์เฟซระบบการแพทย์ ประสบการณ์ฝึกงานช่วยให้ผมเข้าใจการเปลี่ยน Requirements ให้เป็นซอฟต์แวร์ที่ใช้งานได้จริง',
+      education: {
+        school: 'มหาวิทยาลัยวลัยลักษณ์',
+        major: 'เทคโนโลยีสารสนเทศและนวัตกรรมดิจิทัล',
+        period: '2021–2025 · GPA 3.18',
+      },
+      timeline: [
+        {
+          date: 'AUG — NOV 2025',
+          badge: 'ฝึกงาน',
+          role: 'Front-End Developer',
+          company: 'GIS GROUP Co., Ltd.',
+          bullets: [
+            'ออกแบบ UI/UX และ Wireframe บน Figma สำหรับระบบคลินิกเวชศาสตร์การกีฬา',
+            'รวบรวม Requirement และปรับปรุงการออกแบบตามฟีดแบ็กของผู้ใช้งานจริง',
+            'พัฒนาส่วนติดต่อผู้ใช้ด้วย React, Tailwind CSS และ shadcn/ui',
+          ],
+        },
+        {
+          date: 'APR — AUG 2025',
+          badge: 'ฝึกงาน',
+          role: 'Software Developer',
+          company: 'Proalpha Solutions Thailand Co., Ltd.',
+          bullets: [
+            'เรียนรู้ภาษา Progress ABL และการสืบค้นฐานข้อมูลในระบบ Enterprise ERP',
+            'ร่วมพัฒนาระบบในโมดูล Sales และ Purchase ปรับปรุง Business Logic และ UI',
+            'ฝึกฝนการเขียนโค้ด การทดสอบระบบ และร่วมทำ Code Review กับทีม Senior Developer',
+          ],
+        },
+      ],
+    },
+    skillsSection: {
+      eyebrow: '03 / ทักษะและเครื่องมือ',
+      heading: 'เครื่องมือเบื้องหลังชิ้นงาน',
+      allFilter: 'ทั้งหมด',
+      skills: [
+        {
+          category: 'Frontend',
+          title: 'อินเทอร์เฟซที่เข้าใจง่ายและใช้งานได้จริง',
+          stack: ['React', 'Vue 3', 'TypeScript', 'Tailwind CSS'],
+          detail: 'สร้างหน้าเว็บที่รองรับทุกอุปกรณ์ (Responsive), คอมโพเนนต์ที่นำกลับมาใช้ซ้ำได้ และเชื่อมต่อ API อย่างมีประสิทธิภาพ',
+          mark: '01',
+        },
+        {
+          category: 'Backend',
+          title: 'ตรรกะเบื้องหลังระบบที่มั่นคงและรวดเร็ว',
+          stack: ['Go / Gin', 'Node.js', 'Express', 'WebSockets'],
+          detail: 'พัฒนา REST APIs, ระบบรักษาความปลอดภัย/ยืนยันตัวตน และการสื่อสารแบบเรียลไทม์',
+          mark: '02',
+        },
+        {
+          category: 'Data & tools',
+          title: 'รากฐานที่มั่นคงของระบบ',
+          stack: ['PostgreSQL', 'MariaDB', 'Redis', 'Docker', 'Git', 'Figma'],
+          aiTools: ['Codex', 'Antigravity'],
+          aiTitle: 'การพัฒนาโดยใช้ AI สนับสนุน',
+          aiNote:
+            'ใช้ AI coding agent ในการสำรวจโค้ด ช่วยเขียนโปรแกรม และตรวจหาสาเหตุของบั๊กอย่างมีประสิทธิภาพ',
+          detail: 'จัดการฐานข้อมูลเชิงสัมพันธ์ แคชชิ่ง เวิร์กโฟลว์การพัฒนา และการออกแบบอินเทอร์เฟซ',
+          mark: '03',
+        },
+      ],
+    },
+    contactSection: {
+      eyebrow: 'มีตำแหน่งงานหรือโปรเจกต์ที่สนใจ?',
+      heading: 'มาร่วมสร้างสรรค์สิ่งที่มีคุณค่า',
+      headingHighlight: 'และใช้งานได้จริงด้วยกัน.',
+      description: 'พร้อมสำหรับโอกาสร่วมงานทั้งงานประจำ (Full-time) และงานสัญญาจ้าง (Contract)',
+      button: 'ติดต่อผมได้เลย',
+      location: 'กรุงเทพฯ, ประเทศไทย · UTC+7',
+      githubLinkText: 'ติดตามผมบน GitHub',
+    },
+    footer: {
+      copyright: `© ${new Date().getFullYear()} Thanaphat Khunphet`,
+      backToTop: 'กลับขึ้นด้านบน ↑',
+    },
+  },
+}
