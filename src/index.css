@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap');
 :root {
   font-family:'DM Sans',sans-serif;
-  color:#292a30;
-  background:#faf9f6;
+  color:var(--text);
+  background:var(--bg);
+  color-scheme:light;
   font-synthesis:none;
   --bg:#faf9f6;
   --surface:#fff;
@@ -25,7 +26,8 @@ body {
   background:var(--bg);
   color:var(--text);
 }
-body.dark-theme {
+html.dark-theme {
+  color-scheme:dark;
   --bg:#17191c;
   --surface:#202327;
   --text:#edede8;
@@ -922,7 +924,7 @@ h2 {
   50% { box-shadow: 0 0 0 7px #43846808; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  body, .site-header, .experience-section, .contact-panel, .skill-card,
+  html, body, .site-header, .experience-section, .contact-panel, .skill-card,
   .tags li, .theme-toggle, .button, .skill-filters button {
     transition: background-color .3s ease, color .3s ease, border-color .3s ease,
       box-shadow .25s ease, transform .25s ease;

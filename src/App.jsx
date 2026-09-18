@@ -26,8 +26,9 @@ function App() {
     try { return localStorage.getItem('portfolio-theme') === 'dark' } catch { return false }
   })
   useEffect(() => {
-    document.body.classList.toggle('dark-theme', isDark)
-    document.body.classList.remove('light-theme')
+    document.documentElement.classList.toggle('dark-theme', isDark)
+    document.body.classList.remove('dark-theme', 'light-theme')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#17191c' : '#faf9f6')
     try { localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light') } catch { /* The theme still works when storage is unavailable. */ }
   }, [isDark])
   useEffect(() => {
@@ -89,7 +90,7 @@ function App() {
         <div className="hero-copy">
           <div className="availability"><span /> Open to opportunities</div>
           <p className="eyebrow hero-intro">HELLO, I'M THANAPHAT KHUNPHET</p>
-          <h1>Thoughtful interfaces.<br /><span>Reliable systems.</span></h1>
+          <h1>Full-Stack Developer.<br /><span>From design to code.</span></h1>
           <p className="hero-description">A full-stack developer connecting design and engineering. I build web applications with React, Go, and Node.js, with internship experience in ERP and healthcare.</p>
           <div className="hero-actions"><a className="button primary" href="#projects">Explore my work <Arrow /></a><a className="button secondary" href="/Resume_Thanaphat_Khunphet.pdf" download="Resume_Thanaphat_Khunphet.pdf">Download Resume <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" /></svg></a></div>
           <div className="hero-meta"><span>Based in Bangkok, Thailand</span><span className="meta-dot">·</span><a href={GITHUB} target="_blank" rel="noreferrer">GitHub <Arrow diagonal /></a></div>
