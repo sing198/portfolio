@@ -40,6 +40,7 @@ export const translations = {
     projects: [
       {
         name: 'DGKeys',
+        context: 'Personal Project · Solo Developer',
         type: 'E-commerce platform',
         number: '01',
         theme: 'peach',
@@ -53,6 +54,7 @@ export const translations = {
       },
       {
         name: 'Kanban Board',
+        context: 'Personal Project · Solo Developer',
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
@@ -65,16 +67,18 @@ export const translations = {
         repo: 'Kanban-Board',
       },
       {
-        name: 'ALRO Land',
+        name: 'Community Land Management',
+        context: 'University Final Project · Team of 2',
+        contribution: 'My role: Front-end development. My teammate handled the back end.',
         type: 'GIS & land management',
         number: '03',
         theme: 'lilac',
         image: '/screenshots/land/Admin_Home_Right.png',
-        description: 'Making complex land information easier to navigate.',
+        description: 'Land Management System for Sathiit Walailak Community.',
         detail:
-          'A land management application with interactive polygon mapping, analytics dashboards, role-based access, and privacy masking.',
+          'A university final project for mapping land parcels and managing community land records, built with Vue.js, Node.js, and MariaDB.',
         tags: ['Vue 3', 'Node.js', 'MariaDB', 'Leaflet'],
-        demo: 'https://alro-land.vercel.app/',
+        demo: 'https://community-land.vercel.app/',
         repo: 'land',
       },
     ],
@@ -198,6 +202,7 @@ export const translations = {
     projects: [
       {
         name: 'DGKeys',
+        context: 'โปรเจกต์ส่วนตัว · พัฒนาคนเดียว',
         type: 'E-commerce platform',
         number: '01',
         theme: 'peach',
@@ -211,6 +216,7 @@ export const translations = {
       },
       {
         name: 'Kanban Board',
+        context: 'โปรเจกต์ส่วนตัว · พัฒนาคนเดียว',
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
@@ -223,16 +229,18 @@ export const translations = {
         repo: 'Kanban-Board',
       },
       {
-        name: 'ALRO Land',
+        name: 'Community Land Management',
+        context: 'โครงงานจบมหาวิทยาลัย · ทีม 2 คน',
+        contribution: 'บทบาทของผม: พัฒนา Front-end โดยเพื่อนร่วมทีมรับผิดชอบ Back-end',
         type: 'GIS & land management',
         number: '03',
         theme: 'lilac',
         image: '/screenshots/land/Admin_Home_Right.png',
-        description: 'จัดการและแสดงผลข้อมูลที่ดินที่ซับซ้อนให้เข้าใจง่ายและใช้งานได้จริง',
+        description: 'Land Management System for Sathiit Walailak Community',
         detail:
-          'ระบบบริหารจัดการข้อมูลที่ดินด้วยแผนที่ Polygon แบบโต้ตอบ แสดงผล Dashboard วิเคราะห์ข้อมูล จัดการสิทธิ์ผู้ใช้งาน (RBAC) และการปกปิดข้อมูลส่วนบุคคล (Privacy Masking)',
+          'โครงงานจบมหาวิทยาลัยสำหรับแสดงแผนที่แปลงที่ดินและจัดการข้อมูลที่ดินของชุมชน พัฒนาด้วย Vue.js, Node.js และ MariaDB',
         tags: ['Vue 3', 'Node.js', 'MariaDB', 'Leaflet'],
-        demo: 'https://alro-land.vercel.app/',
+        demo: 'https://community-land.vercel.app/',
         repo: 'land',
       },
     ],

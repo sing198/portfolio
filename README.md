@@ -1,6 +1,6 @@
 # Thanaphat Khunphet — Portfolio
 
-A single-page portfolio built with React 19, Vite 8, and plain CSS. It introduces Thanaphat, showcases DGKeys, Kanban Board, and ALRO Land, and provides skills and contact information.
+A single-page portfolio built with React 19, Vite 8, and plain CSS. It introduces Thanaphat, showcases DGKeys, Kanban Board, and Community Land Management, and provides skills and contact information.
 
 ## Development
 

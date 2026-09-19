@@ -240,8 +240,10 @@ function App() {
                 <div className="project-copy">
                   <span className="project-number">PROJECT / {project.number}</span>
                   <h3>{project.name}</h3>
+                  <p className="project-context">{project.context}</p>
                   <p className="project-lead">{project.description}</p>
                   <p className="project-detail">{project.detail}</p>
+                  {project.contribution && <p className="project-contribution">{project.contribution}</p>}
                   <ul className="tags" aria-label={t.projectsSection.techStackAria}>
                     {project.tags.map((tag) => (
                       <li key={tag}>{tag}</li>
@@ -365,9 +367,6 @@ function App() {
               </a>
             </div>
             <div className="contact-details">
-              <span className="contact-star" aria-hidden="true">
-                ✳
-              </span>
               <a href={`mailto:${EMAIL}`}>
                 {EMAIL} <Arrow diagonal />
               </a>
