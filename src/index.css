@@ -30,14 +30,14 @@ body {
 }
 html.dark-theme {
   color-scheme:dark;
-  --bg:#17191c;
-  --surface:#202327;
-  --text:#edede8;
-  --muted:#adaeb6;
-  --line:#36383e;
-  --accent:#c1a8f0;
-  --soft:#282532;
-  --header:rgba(23,25,28,.95);
+  --bg:#0c0914;
+  --surface:#171321;
+  --text:#f1eef8;
+  --muted:#aea6bf;
+  --line:#30283f;
+  --accent:#b497fa;
+  --soft:#1b152b;
+  --header:rgba(15,11,24,.9);
 }
 a {
   color:inherit;
@@ -1056,4 +1056,81 @@ h2 {
   font-size: var(--font-body);
   line-height: 1.8;
   color: var(--text);
+}
+
+/* Ambient dot grid: decorative, fixed to the viewport, and never intercepts input. */
+:root {
+  --grid-dot: rgba(116, 96, 172, .18);
+  --grid-glow: rgba(116, 96, 172, .06);
+}
+html.dark-theme {
+  --grid-dot: rgba(181, 153, 228, .23);
+  --grid-glow: rgba(149, 87, 235, .13);
+}
+#root {
+  position: relative;
+  isolation: isolate;
+}
+main, .site-footer {
+  position: relative;
+  z-index: 1;
+}
+.dot-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  --grid-x: 0px;
+  --grid-y: 0px;
+  --pointer-x: 50%;
+  --pointer-y: 35%;
+  --pointer-visible: 0;
+  background: radial-gradient(ellipse at 50% 0%, var(--grid-glow), transparent 75%);
+}
+.dot-background-grid {
+  position: absolute;
+  inset: -32px;
+  background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.5px);
+  background-size: 28px 28px;
+  transform: translate(var(--grid-x), var(--grid-y));
+  mask-image: linear-gradient(to bottom, #000 5%, rgba(0, 0, 0, .65) 75%, transparent);
+}
+.dot-background-glow {
+  position: absolute;
+  inset: 0;
+  opacity: var(--pointer-visible);
+  background: radial-gradient(260px circle at var(--pointer-x) var(--pointer-y), var(--grid-glow), transparent);
+  transition: opacity .4s ease;
+}
+html.dark-theme h1 span,
+html.dark-theme h2 > span {
+  color: #be95f3;
+  background: linear-gradient(110deg, #a78bfa 10%, #df77bf 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html.dark-theme .primary {
+  background: linear-gradient(110deg, #7950ce, #a83c83);
+  color: #fff;
+  border-color: #9c6ce0;
+}
+html.dark-theme .peach { background: #342333; color: #edbac5; }
+html.dark-theme .mint { background: #1b2b31; color: #a4d5c6; }
+html.dark-theme .lilac { background: #2b2042; color: #c8b0ee; }
+html.dark-theme .experience-section {
+  background: rgba(24, 18, 37, .88);
+  border-block: 1px solid var(--line);
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .dot-background-grid { transform: none; }
+  .dot-background-glow { display: none; }
+}
+@media (forced-colors: active) {
+  .dot-background { display: none; }
+  html.dark-theme h1 span, html.dark-theme h2 > span {
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
 }

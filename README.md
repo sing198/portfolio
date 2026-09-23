@@ -32,7 +32,7 @@ The production build is generated in `dist/`. `preview` serves that build locall
 ## Features
 
 - Home, Work, Experience, Skills, and Contact sections with scroll-aware navigation.
-- Light and dark themes, with a light default and the selected preference saved in localStorage.
+- Light and dark themes, with a dark purple default and the selected preference saved in localStorage.
 - Categorized skill cards with keyboard-accessible filters and responsive layouts.
 - Vercel Web Analytics.
 
@@ -41,3 +41,5 @@ Content is maintained in the source code. This repository has no backend, databa
 ## Deployment
 
 On Vercel, use the Vite framework preset, build command `npm run build`, and output directory `dist`.
+
+The decorative background uses a cursor-responsive dot grid on mouse devices. Touch devices and reduced-motion preferences receive a static grid.

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import DotBackground from './components/DotBackground'
 import { Analytics } from '@vercel/analytics/react'
 import { EMAIL, GITHUB, translations } from './translations'
 
@@ -22,9 +23,9 @@ function App() {
   const [filter, setFilter] = useState('all')
   const [isDark, setIsDark] = useState(() => {
     try {
-      return localStorage.getItem('portfolio-theme') === 'dark'
+      return localStorage.getItem('portfolio-theme') !== 'light'
     } catch {
-      return false
+      return true
     }
   })
 
@@ -42,7 +43,7 @@ function App() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark-theme', isDark)
     document.body.classList.remove('dark-theme', 'light-theme')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#17191c' : '#faf9f6')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#0c0914' : '#faf9f6')
     try {
       localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light')
     } catch {
@@ -98,6 +99,7 @@ function App() {
   return (
     <>
       <Analytics />
+      <DotBackground />
       <a className="skip-link" href="#main">
         {t.skipLink}
       </a>

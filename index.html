@@ -1,11 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark-theme">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Thanaphat Khunphet — Full-Stack Developer in Bangkok. Explore web applications, experience, and skills in React, Go, and Node.js." />
-    <meta name="theme-color" content="#faf9f6" />
+    <meta name="theme-color" content="#0c0914" />
+    <script>
+      try {
+        const dark = localStorage.getItem('portfolio-theme') !== 'light';
+        document.documentElement.classList.toggle('dark-theme', dark);
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#0c0914' : '#faf9f6';
+      } catch { /* Keep the default dark theme when storage is unavailable. */ }
+    </script>
     <title>Thanaphat Khunphet — Full-Stack Developer</title>
 
     <!-- Open Graph / Social Sharing -->

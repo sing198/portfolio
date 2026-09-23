@@ -58,7 +58,7 @@ export const translations = {
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
-        image: '/screenshots/KanbanBoard.png',
+        image: '/screenshots/KanbanDashboard.png',
         description: 'One workspace. Everyone on the same page.',
         detail:
           'A collaborative board that syncs cards and swimlanes over WebSockets, with Redis Pub/Sub for communication across instances.',
@@ -220,7 +220,7 @@ export const translations = {
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
-        image: '/screenshots/KanbanBoard.png',
+        image: '/screenshots/KanbanDashboard.png',
         description: 'พื้นที่ทำงานร่วมกันแบบเรียลไทม์ ซิงค์ข้อมูลตรงกันทุกคน',
         detail:
           'กระดานจัดการงานร่วมกันแบบเรียลไทม์ ซิงค์สถานะการ์ดและ Swimlane ผ่าน WebSockets พร้อมใช้ Redis Pub/Sub กระจายข้อมูลระหว่าง Instance',
