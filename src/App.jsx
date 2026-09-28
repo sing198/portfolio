@@ -43,7 +43,7 @@ function App() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark-theme', isDark)
     document.body.classList.remove('dark-theme', 'light-theme')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#0c0914' : '#faf9f6')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#0d0e15' : '#f4f1e9')
     try {
       localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light')
     } catch {
@@ -55,7 +55,7 @@ function App() {
     const onScroll = () => {
       let current = 'home'
       for (const [id] of t.nav) {
-        if (document.getElementById(id)?.getBoundingClientRect().top <= 160) current = id
+        if (document.getElementById(id)?.getBoundingClientRect().top <= 240) current = id
       }
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5) current = 'contact'
       setActiveNav(current)
@@ -161,6 +161,7 @@ function App() {
       </header>
       <main id="main">
         <section className="hero container" id="home">
+          <div className="hero-grid-art" aria-hidden="true" />
           <div className="hero-copy">
             <div className="availability">
               <span /> {t.hero.availability}
@@ -192,6 +193,10 @@ function App() {
             </div>
           </div>
           <div className="portrait-composition">
+            <div className="portrait-orbit portrait-orbit-outer" aria-hidden="true" />
+            <div className="portrait-orbit portrait-orbit-inner" aria-hidden="true" />
+            <div className="portrait-disc" aria-hidden="true" />
+            <div className="portrait-spark" aria-hidden="true">✳</div>
             <div className="portrait-frame">
               <img src="/profile.jpg" alt={t.hero.name} fetchPriority="high" />
               <div className="portrait-caption">
@@ -199,6 +204,7 @@ function App() {
                 <small>{t.hero.role}</small>
               </div>
             </div>
+            <div className="portrait-coordinate" aria-hidden="true">T.K. / 2026</div>
           </div>
         </section>
         <div className="expertise-strip">
@@ -239,7 +245,7 @@ function App() {
                     <img src={project.image} alt={`${project.name} application screenshot`} loading="lazy" />
                   </div>
                 </a>
-                <div className="project-copy">
+                <div className="project-copy" data-index={project.number}>
                   <span className="project-number">PROJECT / {project.number}</span>
                   <h3>{project.name}</h3>
                   <p className="project-context">{project.context}</p>
@@ -290,7 +296,7 @@ function App() {
             </div>
             <div className="timeline">
               {t.experienceSection.timeline.map((exp, idx) => (
-                <article className="experience" key={idx}>
+                <article className="experience" key={idx} data-index={String(idx + 1).padStart(2, '0')}>
                   <div className="experience-date">
                     {exp.date} <span>{exp.badge}</span>
                   </div>
@@ -323,7 +329,7 @@ function App() {
               </button>
             ))}
           </div>
-          <div className="skill-grid" key={`${lang}-${filter}`}>
+          <div className={`skill-grid ${filter !== 'all' ? 'is-filtered' : ''}`} key={`${lang}-${filter}`}>
             {t.skillsSection.skills
               .filter((s) => filter === 'all' || s.category === filter)
               .map((skill) => (

@@ -72,5 +72,12 @@ export default function DotBackground() {
     }
   }, [])
 
-  return <div className="dot-background" ref={backgroundRef} aria-hidden="true"><div className="dot-background-grid" /><div className="dot-background-glow" /></div>
+  return (
+    <div className="dot-background" ref={backgroundRef} aria-hidden="true">
+      <div className="dot-background-grid" />
+      <div className="dot-background-arc dot-background-arc-one" />
+      <div className="dot-background-arc dot-background-arc-two" />
+      <div className="dot-background-glow" />
+    </div>
+  )
 }
