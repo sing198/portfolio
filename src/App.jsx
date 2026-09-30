@@ -199,10 +199,6 @@ function App() {
             <div className="portrait-spark" aria-hidden="true">✳</div>
             <div className="portrait-frame">
               <img src="/profile.jpg" alt={t.hero.name} fetchPriority="high" />
-              <div className="portrait-caption">
-                <span>{t.hero.name}</span>
-                <small>{t.hero.role}</small>
-              </div>
             </div>
             <div className="portrait-coordinate" aria-hidden="true">T.K. / 2026</div>
           </div>

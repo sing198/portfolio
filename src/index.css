@@ -15,6 +15,7 @@
   --grid-line: #161b3120;
   --headline-gradient: linear-gradient(120deg, #3449d9 5%, #dc624f 88%);
   --shadow: 0 25px 65px #181c3020;
+  --portrait-frame-color: #fff;
   font-family: 'DM Sans', 'Noto Sans Thai', sans-serif;
   color: var(--text);
   background: var(--bg);
@@ -39,6 +40,7 @@ html.dark-theme {
   --grid-line: #ffffff16;
   --headline-gradient: linear-gradient(115deg, #9ca8ff 3%, #ff9c80 93%);
   --shadow: 0 30px 75px #00000066;
+  --portrait-frame-color: #0d0e15;
   color-scheme: dark;
 }
 
@@ -495,7 +497,7 @@ h1 > span,
   z-index: -3;
   border-radius: 47% 53% 65% 35% / 50% 46% 54% 50%;
   background: var(--cobalt);
-  transform: rotate(-23deg);
+  transform: rotate(-23deg) scale(.88);
   box-shadow: 0 34px 90px #5969ef42;
 }
 
@@ -557,43 +559,24 @@ h1 > span,
 
 .portrait-frame {
   position: absolute;
-  top: 18%;
-  left: 28%;
+  top: 26%;
+  left: 26%;
   z-index: 2;
-  width: 52%;
-  max-width: 240px;
+  width: 54%;
+  max-width: 250px;
+  aspect-ratio: 1;
   overflow: hidden;
-  border: 8px solid var(--surface);
-  border-radius: 120px 120px 24px 24px;
-  background: var(--surface);
+  border: 8px solid var(--portrait-frame-color);
+  border-radius: 50%;
+  background: var(--portrait-frame-color);
   box-shadow: var(--shadow);
-  transform: rotate(7deg);
 }
 
 .portrait-frame img {
   width: 100%;
-  aspect-ratio: .78;
+  height: 100%;
   object-fit: cover;
-  object-position: center 22%;
-  border-radius: 110px 110px 5px 5px;
-}
-
-.portrait-caption {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  padding: 12px 8px 7px;
-  text-align: center;
-}
-
-.portrait-caption > span {
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.portrait-caption small {
-  color: var(--muted);
-  font-size: 10px;
+  object-position: center 20%;
 }
 
 .portrait-coordinate {

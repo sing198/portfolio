@@ -21,7 +21,6 @@ export const translations = {
       exploreBtn: 'Explore my work',
       resumeBtn: 'Download Resume',
       location: 'Based in Bangkok, Thailand',
-      role: 'Full-Stack Developer',
       name: 'Thanaphat Khunphet',
     },
     strip: {
@@ -175,7 +174,7 @@ export const translations = {
     ],
     hero: {
       availability: 'พร้อมเริ่มงานทันที',
-      eyebrow: 'สวัสดีครับ ผม ธนภัทร ขุนเพ็ชร',
+      eyebrow: 'สวัสดีครับ ผม ธนภัทร ขุนเพชร',
       headlineLead: 'Full-Stack Developer.',
       headlineSub: 'จากดีไซน์สู่โค้ดจริง',
       description:
@@ -183,8 +182,7 @@ export const translations = {
       exploreBtn: 'ดูผลงานของผม',
       resumeBtn: 'ดาวน์โหลดเรซูเม่ (ภาษาอังกฤษ)',
       location: 'กรุงเทพฯ, ประเทศไทย',
-      role: 'Full-Stack Developer',
-      name: 'ธนภัทร ขุนเพ็ชร',
+      name: 'ธนภัทร ขุนเพชร',
     },
     strip: {
       tag: 'DESIGN → DEVELOPMENT',
