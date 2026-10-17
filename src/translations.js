@@ -52,18 +52,20 @@ export const translations = {
         repo: 'OMS',
       },
       {
-        name: 'Kanban Board',
+        name: 'co-board',
         context: 'Personal Project · Solo Developer',
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
-        image: '/screenshots/KanbanDashboard.png',
-        description: 'One workspace. Everyone on the same page.',
+        image: '/screenshots/co-board.png',
+        previewShape: 'wide',
+        description: 'A collaborative workspace with a view for every plan.',
         detail:
-          'A collaborative board that syncs cards and swimlanes over WebSockets, with Redis Pub/Sub for communication across instances.',
-        tags: ['React', 'TypeScript', 'Go', 'Redis'],
+          'Plan with Kanban, Table, Calendar, Timeline, Mind Map and Scrum boards, with real-time updates through WebSockets and Redis Pub/Sub plus owner, editor and viewer roles.',
+        tags: ['React', 'TypeScript', 'Go / Gin', 'WebSocket', 'Redis', 'SQLite / PostgreSQL'],
         demo: 'https://kanban-board-eta-five.vercel.app/',
-        repo: 'Kanban-Board',
+        demoNote: 'The demo backend did not respond during the latest check. Explore the screenshots and walkthrough while hosting is being checked.',
+        repo: 'co-board',
       },
       {
         name: 'Community Land Management',
@@ -73,6 +75,7 @@ export const translations = {
         number: '03',
         theme: 'lilac',
         image: '/screenshots/land/Admin_Home_Right.png',
+        previewShape: 'wide',
         description: 'Land Management System for Sathiit Walailak Community.',
         detail:
           'A university final project for mapping land parcels and managing community land records, built with Vue.js, Node.js, and MariaDB.',
@@ -90,7 +93,7 @@ export const translations = {
       education: {
         school: 'Walailak University',
         major: 'IT & Digital Innovation',
-        period: '2021–2025 · GPA 3.18',
+        period: '2022–2026 · GPA 3.18',
       },
       timeline: [
         {
@@ -213,18 +216,20 @@ export const translations = {
         repo: 'OMS',
       },
       {
-        name: 'Kanban Board',
+        name: 'co-board',
         context: 'โปรเจกต์ส่วนตัว · พัฒนาคนเดียว',
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
-        image: '/screenshots/KanbanDashboard.png',
-        description: 'พื้นที่ทำงานร่วมกันแบบเรียลไทม์ ซิงค์ข้อมูลตรงกันทุกคน',
+        image: '/screenshots/co-board.png',
+        previewShape: 'wide',
+        description: 'พื้นที่ทำงานร่วมกัน พร้อมมุมมองที่เหมาะกับทุกแผนงาน',
         detail:
-          'กระดานจัดการงานร่วมกันแบบเรียลไทม์ ซิงค์สถานะการ์ดและ Swimlane ผ่าน WebSockets พร้อมใช้ Redis Pub/Sub กระจายข้อมูลระหว่าง Instance',
-        tags: ['React', 'TypeScript', 'Go', 'Redis'],
+          'จัดการงานด้วยบอร์ด Kanban, Table, Calendar, Timeline, Mind Map และ Scrum ซิงค์ข้อมูลแบบเรียลไทม์ผ่าน WebSockets และ Redis Pub/Sub พร้อมกำหนดสิทธิ์ Owner, Editor และ Viewer',
+        tags: ['React', 'TypeScript', 'Go / Gin', 'WebSocket', 'Redis', 'SQLite / PostgreSQL'],
         demo: 'https://kanban-board-eta-five.vercel.app/',
-        repo: 'Kanban-Board',
+        demoNote: 'Back-end ของ Demo ไม่ตอบกลับในการตรวจล่าสุด ระหว่างตรวจ hosting สามารถดูภาพและขั้นตอนการใช้งานด้านล่างได้',
+        repo: 'co-board',
       },
       {
         name: 'Community Land Management',
@@ -234,6 +239,7 @@ export const translations = {
         number: '03',
         theme: 'lilac',
         image: '/screenshots/land/Admin_Home_Right.png',
+        previewShape: 'wide',
         description: 'Land Management System for Sathiit Walailak Community',
         detail:
           'โครงงานจบมหาวิทยาลัยสำหรับแสดงแผนที่แปลงที่ดินและจัดการข้อมูลที่ดินของชุมชน พัฒนาด้วย Vue.js, Node.js และ MariaDB',
@@ -251,7 +257,7 @@ export const translations = {
       education: {
         school: 'มหาวิทยาลัยวลัยลักษณ์',
         major: 'เทคโนโลยีสารสนเทศและนวัตกรรมดิจิทัล',
-        period: '2021–2025 · GPA 3.18',
+        period: '2022–2026 · GPA 3.18',
       },
       timeline: [
         {

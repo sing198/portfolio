@@ -26,3 +26,13 @@ dist-ssr
 # Local sub-projects
 /Kanban-Board-main/
 /land/
+
+# Personal documents
+*.pdf
+
+# Playwright profile
+playwright-learning-profile/
+
+# Auto learning scripts/data
+aipass_auto_learning_*
+auto_learning_playwright.py
