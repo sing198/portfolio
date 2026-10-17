@@ -226,7 +226,7 @@ const experiences = {
             instruction: 'Open the public search page and choose a sample parcel such as “SPK-001”, or enter a parcel number.',
             expectation: 'The result brings together the parcel area, location and land use while masking personal identifiers.',
             imageSrc: '/screenshots/land/Legal Officer Home_Right.png',
-            imageLabel: 'Community Land Management workspace, shown in a legal officer session',
+            imageLabel: 'Community Land Management workspace, shown in an administrative officer session',
           },
           {
             id: 'layer',
@@ -234,7 +234,7 @@ const experiences = {
             instruction: 'Return to the map and choose “ดาวเทียม” (Satellite), then “แผนที่ถนน” (Road map).',
             expectation: 'The background changes between satellite imagery and roads while the parcel overlays remain.',
             imageSrc: '/screenshots/land/Land Reform Officer_Home_Right.png',
-            imageLabel: 'Community Land Management map controls, shown in a land officer session',
+            imageLabel: 'Community Land Management map controls, shown in a land reform officer session',
           },
         ],
         note: 'Map and search routes are public in the current source. Full parcel records require an officer role; local setup and mock accounts are in the README. The images show officer sessions.',
@@ -242,9 +242,9 @@ const experiences = {
       architecture: {
         intro: 'Parcel records come from the API; Leaflet combines them with an independent base map.',
         nodes: [
-          { id: 'browser', label: 'Map & officer workspace', technology: 'Vue 3 · Leaflet · Pinia', description: 'Displays parcels as polygons or markers and switches between road and satellite layers. Vue routes and the auth store shape public and officer workflows; API checks enforce access to records.' },
-          { id: 'api', label: 'Land records API', technology: 'Node.js · Express', description: 'Authenticates officer requests, checks role permissions and validates input. Services and repositories query land, citizen and heir data; the public search response masks personal identifiers.' },
-          { id: 'database', label: 'Community records', technology: 'MariaDB', description: 'Stores parcels, coordinates, citizens, heirs and users. The repository layer uses parameterized SQL; services handle transactions for linked record operations.' },
+          { id: 'browser', label: 'Map & officer workspace', technology: 'Vue 3 · Bulma · Leaflet · Pinia', description: 'Displays parcels as polygons or markers and switches between road and satellite layers. Vue routes and role-based auth support 4 user groups (Citizens, Land Reform Officers, Administrative Officers, and Admin).' },
+          { id: 'api', label: 'Land records API', technology: 'Node.js · Express · REST API', description: 'Authenticates officer sessions via JWT, verifies role permissions, and validates input. Services manage transactions across 17 database tables; public search responses mask citizen national IDs.' },
+          { id: 'database', label: 'Community records', technology: 'MariaDB (alro_land)', description: 'Relational schema storing parcels across 14 alleys (Soi 0–13), GIS coordinates, citizen-heir relationships, land use (rubber, orchard, livestock), deeds/photos, and audit logs.' },
           { id: 'tiles', label: 'Base map imagery', technology: 'OpenStreetMap · Esri', description: 'Provides road or satellite tiles directly to Leaflet in the browser. These tiles provide geographic context; parcel and community records are served by the project API.' },
         ],
         connections: [
@@ -277,7 +277,7 @@ const experiences = {
             instruction: 'เปิดหน้าสืบค้นสำหรับประชาชน เลือกตัวอย่าง “SPK-001” หรือกรอกเลขแปลงที่ต้องการ',
             expectation: 'ผลค้นหารวมเนื้อที่ ที่ตั้ง และการใช้ประโยชน์ พร้อมปกปิดเลขระบุตัวบุคคล',
             imageSrc: '/screenshots/land/Legal Officer Home_Right.png',
-            imageLabel: 'หน้าระบบ Community Land Management ใน session นิติกร',
+            imageLabel: 'หน้าระบบ Community Land Management ใน session เจ้าหน้าที่งานธุรการ',
           },
           {
             id: 'layer',
@@ -285,7 +285,7 @@ const experiences = {
             instruction: 'กลับไปหน้าแผนที่ แล้วเลือก “ดาวเทียม” จากนั้นสลับกลับเป็น “แผนที่ถนน”',
             expectation: 'ภาพพื้นหลังสลับระหว่างดาวเทียมกับถนน โดยยังแสดงตำแหน่งแปลงที่ดินอยู่',
             imageSrc: '/screenshots/land/Land Reform Officer_Home_Right.png',
-            imageLabel: 'แผนที่และปุ่มควบคุม Community Land Management ใน session เจ้าหน้าที่ที่ดิน',
+            imageLabel: 'แผนที่และปุ่มควบคุม Community Land Management ใน session เจ้าหน้าที่โครงการปฏิรูปที่ดิน',
           },
         ],
         note: 'Source ปัจจุบันเปิดแผนที่และหน้าสืบค้นให้ประชาชน รายละเอียดแปลงเต็มต้องใช้สิทธิ์เจ้าหน้าที่ README มีวิธีรันและบัญชีจำลองในเครื่อง ส่วนภาพประกอบถ่ายจาก session เจ้าหน้าที่',
@@ -293,9 +293,9 @@ const experiences = {
       architecture: {
         intro: 'ข้อมูลแปลงมาจาก API ส่วน Leaflet รวมตำแหน่งแปลงกับภาพแผนที่พื้นหลัง',
         nodes: [
-          { id: 'browser', label: 'แผนที่และหน้าจอเจ้าหน้าที่', technology: 'Vue 3 · Leaflet · Pinia', description: 'แสดงแปลงเป็นพื้นที่หรือหมุด และสลับแผนที่ถนนกับดาวเทียม Vue routes และ auth store จัดหน้าจอสำหรับประชาชนและเจ้าหน้าที่ ส่วน API ตรวจสิทธิ์การเข้าถึงข้อมูลจริง' },
-          { id: 'api', label: 'API ข้อมูลที่ดิน', technology: 'Node.js · Express', description: 'ยืนยันตัวตนเจ้าหน้าที่ ตรวจสิทธิ์ตามบทบาท และตรวจข้อมูลที่รับเข้า Services และ repositories อ่านข้อมูลแปลง ราษฎร และทายาท ส่วนผลค้นหาสาธารณะปกปิดเลขระบุตัวบุคคล' },
-          { id: 'database', label: 'ทะเบียนชุมชน', technology: 'MariaDB', description: 'เก็บแปลง พิกัด ราษฎร ทายาท และผู้ใช้ ชั้น repository ใช้ parameterized SQL และ services จัดการ transaction สำหรับการทำงานกับข้อมูลที่เชื่อมกัน' },
+          { id: 'browser', label: 'แผนที่และหน้าจอเจ้าหน้าที่', technology: 'Vue 3 · Bulma · Leaflet · Pinia', description: 'แสดงแปลงเป็นพื้นที่หรือหมุด และสลับแผนที่ถนนกับดาวเทียม Vue routes และระบบสิทธิ์ RBAC รองรับผู้ใช้ 4 กลุ่ม (ราษฎร, เจ้าหน้าที่ปฏิรูปที่ดิน, เจ้าหน้าที่ธุรการ และผู้ดูแลระบบ)' },
+          { id: 'api', label: 'API ข้อมูลที่ดิน', technology: 'Node.js · Express · REST API', description: 'ยืนยันตัวตนเจ้าหน้าที่ด้วย JWT ตรวจสิทธิ์ตามบทบาท และจัดการ Transaction เชื่อมโยงข้อมูลแปลง ราษฎร ทายาท ภาพถ่ายที่อยู่อาศัย และบันทึกประวัติการแก้ไข โดยผลค้นหาสาธารณะปกปิดเลขบัตรประชาชน' },
+          { id: 'database', label: 'ทะเบียนชุมชน', technology: 'MariaDB (alro_land)', description: 'ฐานข้อมูลเชิงสัมพันธ์ 17 ตาราง เก็บแปลงที่ดิน 14 ซอย (ซอย 0–13), พิกัด GIS, เครือญาติราษฎร-ทายาท, สถิติการใช้ประโยชน์ (สวนยาง ผลไม้ ปศุสัตว์), เอกสาร ส.ป.ก. 4-01 และประวัติ Audit Log' },
           { id: 'tiles', label: 'ภาพแผนที่พื้นหลัง', technology: 'OpenStreetMap · Esri', description: 'ส่งภาพแผนที่ถนนหรือดาวเทียมให้ Leaflet ในเบราว์เซอร์โดยตรง ใช้เป็นบริบทของพื้นที่ ส่วนข้อมูลแปลงและทะเบียนชุมชนมาจาก API ของโปรเจกต์' },
         ],
         connections: [

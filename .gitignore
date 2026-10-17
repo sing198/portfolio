@@ -36,3 +36,7 @@ playwright-learning-profile/
 # Auto learning scripts/data
 aipass_auto_learning_*
 auto_learning_playwright.py
+
+# Installers / Binaries
+*.dmg
+

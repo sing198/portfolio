@@ -78,17 +78,18 @@ const projectDetails = {
   land: {
     gallery: [
       { src: '/screenshots/land/Admin_Home_Right.png', label: { en: 'Admin', th: 'ผู้ดูแลระบบ' }, width: 2856, height: 1406 },
-      { src: '/screenshots/land/Land Reform Officer_Home_Right.png', label: { en: 'Land officer', th: 'เจ้าหน้าที่ที่ดิน' }, width: 2864, height: 1404 },
-      { src: '/screenshots/land/Legal Officer Home_Right.png', label: { en: 'Legal officer', th: 'นิติกร' }, width: 2854, height: 1408 },
+      { src: '/screenshots/land/Land Reform Officer_Home_Right.png', label: { en: 'Land Reform Officer', th: 'เจ้าหน้าที่ปฏิรูปที่ดิน' }, width: 2864, height: 1404 },
+      { src: '/screenshots/land/Legal Officer Home_Right.png', label: { en: 'Administrative Officer', th: 'เจ้าหน้าที่งานธุรการ' }, width: 2854, height: 1408 },
     ],
     caseStudy: {
       en: {
-        challenge: 'Connect parcel locations with community land records through a map, search, and officer workflows.',
+        challenge: 'Replace fragile paper-based records across 14 alleys (Soi 0–13 in Thaiburi & Hua Taphan) with a centralized GIS platform for Walailak University and ALRO (ส.ป.ก.) to eliminate data loss and manual search delays.',
         decisions: [
-          { title: 'Make the map reusable', detail: 'Use a reusable Leaflet map with land-use colors, parcel detail links, and road or satellite layers.' },
-          { title: 'Choose coordinates visually', detail: 'Let officers choose coordinates by clicking the map or dragging a marker, then return the selection to the parcel form.' },
+          { title: 'Role-based access control across 4 user groups', detail: 'Defined tailored permissions for Citizens (public search), Land Reform Officers (deeds & parcels), Administrative Officers (full CRUD, audit history, uploads), and System Admins.' },
+          { title: 'Interactive GIS map & coordinate picker', detail: 'Built reusable Leaflet map components with satellite/road layer switching, parcel status color coding, and visual coordinate selection for parcel registration.' },
+          { title: 'Relational data modeling with audit history', detail: 'Modeled 17 relational tables in MariaDB to manage citizen-heir relationships, land-use classifications (rubber, orchards, livestock), file attachments, and complete edit logs.' },
         ],
-        outcome: 'Inspect the map component, coordinate picker, and role-aware routes in the source. The README includes setup steps and mock accounts for a local walkthrough.',
+        outcome: 'Delivered a responsive web application that speeds up parcel lookups to under 5 seconds, centralizes SPK 4-01 deeds and housing photos, and provides clear analytics on community land usage and encroachment.',
         evidence: [
           { label: 'GIS map component', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/GisMap.vue' },
           { label: 'Coordinate picker', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/CoordinatePickerModal.vue' },
@@ -96,12 +97,13 @@ const projectDetails = {
         ],
       },
       th: {
-        challenge: 'เชื่อมตำแหน่งแปลงที่ดินกับข้อมูลชุมชน ผ่านแผนที่ การค้นหา และหน้าจอทำงานของเจ้าหน้าที่',
+        challenge: 'เปลี่ยนระบบบันทึกเอกสารกระดาษดั้งเดิมในพื้นที่ชุมชนสาธิต 14 ซอย (ต.ไทยบุรี และ ต.หัวตะพาน) ให้เป็นระบบดิจิทัลรวมศูนย์ เพื่อช่วย ม.วลัยลักษณ์ และ ส.ป.ก. แก้ปัญหาข้อมูลสูญหาย ทับซ้อน และค้นหาล่าช้า',
         decisions: [
-          { title: 'ใช้แผนที่ร่วมกันในหลายหน้าจอ', detail: 'ใช้คอมโพเนนต์แผนที่ Leaflet ร่วมกัน แยกสีตามการใช้ประโยชน์ เชื่อมไปยังรายละเอียดแปลง และสลับแผนที่ถนนหรือดาวเทียม' },
-          { title: 'เลือกพิกัดผ่านแผนที่', detail: 'ให้เจ้าหน้าที่เลือกพิกัดด้วยการคลิกแผนที่หรือลากหมุด แล้วส่งพิกัดกลับไปยังฟอร์มแปลงที่ดิน' },
+          { title: 'กำหนดสิทธิ์ตามบทบาท 4 กลุ่มผู้ใช้ (RBAC)', detail: 'แบ่งสิทธิ์การใช้งานชัดเจนสำหรับ ราษฎร (สืบค้นทั่วไป), เจ้าหน้าที่โครงการปฏิรูปที่ดิน (ดูแปลงและดาวน์โหลดโฉนด), เจ้าหน้าที่งานธุรการ (จัดการข้อมูลเต็มรูปแบบและดูประวัติการแก้ไข) และผู้ดูแลระบบ' },
+          { title: 'แผนที่ GIS แบบโต้ตอบพร้อมเครื่องมือเลือกพิกัด', detail: 'ใช้ Leaflet แสดงแผนที่แปลงที่ดิน แยกสีตามสถานะ สลับชั้นดาวเทียม/ถนน และให้เจ้าหน้าที่คลิกหรือลากหมุดบนแผนที่เพื่อระบุพิกัด Lat/Long เข้าฟอร์มได้ทันที' },
+          { title: 'ออกแบบฐานข้อมูลเชิงสัมพันธ์พร้อมประวัติการแก้ไข (Audit Trail)', detail: 'จัดโครงสร้าง 17 ตารางใน MariaDB เชื่อมโยงข้อมูลแปลงที่ดิน ราษฎร-ทายาท ประเภทการใช้ประโยชน์ (ยางพารา สวนผลไม้ ปศุสัตว์) เอกสารแนบ และบันทึกประวัติการเปลี่ยนแปลงทุกรายการ' },
         ],
-        outcome: 'ดูคอมโพเนนต์แผนที่ ตัวเลือกพิกัด และ routes ที่กำหนดระดับสิทธิ์ใน source โดย README มีขั้นตอนติดตั้งและบัญชีจำลองสำหรับลองระบบในเครื่อง',
+        outcome: 'ส่งมอบเว็บแอปพลิเคชันที่สืบค้นข้อมูลแปลงได้ภายใน 5 วินาที จัดเก็บไฟล์โฉนด ส.ป.ก. 4-01 และภาพถ่ายที่อยู่อาศัยเป็นระบบ พร้อมแดชบอร์ดสรุปสถิติและรายงานเพื่อส่งต่อให้ ส.ป.ก.',
         evidence: [
           { label: 'คอมโพเนนต์แผนที่ GIS', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/GisMap.vue' },
           { label: 'ตัวเลือกพิกัด', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/CoordinatePickerModal.vue' },
