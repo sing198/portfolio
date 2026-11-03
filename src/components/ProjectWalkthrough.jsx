@@ -11,6 +11,8 @@ const walkthroughCopy = {
     next: 'Next',
     screenshot: 'View screenshot',
     demo: 'Open live demo',
+    show: 'Show walkthrough steps',
+    hide: 'Hide walkthrough steps',
     status: (step, count) => `Step ${step} of ${count}`,
   },
   th: {
@@ -21,6 +23,8 @@ const walkthroughCopy = {
     next: 'ถัดไป',
     screenshot: 'ดูภาพนี้',
     demo: 'เปิด Live demo',
+    show: 'แสดงขั้นตอนการลองใช้งาน',
+    hide: 'ซ่อนขั้นตอนการลองใช้งาน',
     status: (step, count) => `ขั้นตอน ${step} จาก ${count}`,
   },
 }
@@ -31,6 +35,7 @@ function WalkthroughArrow({ previous = false }) {
 
 export default function ProjectWalkthrough({ project, lang = 'en', onViewImage }) {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [expanded, setExpanded] = useState(false)
   const headingId = useId()
   const detailId = useId()
   const copy = walkthroughCopy[lang] || walkthroughCopy.en
@@ -52,7 +57,10 @@ export default function ProjectWalkthrough({ project, lang = 'en', onViewImage }
       {project.demo && <a className="project-walkthrough-demo" href={project.demo} target="_blank" rel="noreferrer">{walkthrough.demoLabel || copy.demo}<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M7 17 17 7M7 7h10v10" /></svg></a>}
     </div>
 
-    <div className="project-walkthrough-selectors" role="group" aria-label={`${copy.steps}: ${project.name}`}>
+    <button type="button" className="project-walkthrough-toggle" aria-expanded={expanded} onClick={() => setExpanded(!expanded)}>{expanded ? copy.hide : copy.show}</button>
+
+    {expanded && <>
+    <div className="project-walkthrough-selectors" role="group" aria-label={`${copy.steps}: ${project.name}`}> 
       {steps.map((item, itemIndex) => <button type="button" key={item.id || itemIndex} aria-pressed={index === itemIndex} aria-controls={detailId} onClick={() => setActiveIndex(itemIndex)}>
         <span className="project-walkthrough-number" aria-hidden="true">{String(itemIndex + 1).padStart(2, '0')}</span>
         <span>{item.title}</span>
@@ -81,5 +89,6 @@ export default function ProjectWalkthrough({ project, lang = 'en', onViewImage }
       </div>
     </div>
     {walkthrough.note && <p className="project-walkthrough-note">{walkthrough.note}</p>}
+    </>}
   </section>
 }
