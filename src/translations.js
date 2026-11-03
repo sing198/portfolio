@@ -43,7 +43,7 @@ export const translations = {
         type: 'E-commerce platform',
         number: '01',
         theme: 'peach',
-        image: '/screenshots/dgkeys.png',
+        image: '/screenshots/dgkeys.webp',
         description: 'A digital storefront built around a reliable checkout.',
         detail:
           'A full-stack game key store with PostgreSQL transaction locking to prevent race conditions during checkout.',
@@ -57,7 +57,7 @@ export const translations = {
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
-        image: '/screenshots/co-board.png',
+        image: '/screenshots/co-board.webp',
         previewShape: 'wide',
         description: 'A collaborative workspace with a view for every plan.',
         detail:
@@ -135,14 +135,14 @@ export const translations = {
         {
           category: 'Backend',
           title: 'The logic behind the experience.',
-          stack: ['Go / Gin', 'Node.js', 'Express', 'WebSockets'],
+          stack: ['Go / Gin', 'Python', 'Node.js', 'Express', 'WebSockets'],
           detail: 'REST APIs, authentication, and real-time communication.',
           mark: '02',
         },
         {
           category: 'Data & tools',
           title: 'A solid foundation.',
-          stack: ['PostgreSQL', 'MariaDB', 'Redis', 'Docker', 'Git', 'Figma'],
+          stack: ['PostgreSQL', 'MariaDB', 'SQL', 'Redis', 'Docker', 'Git', 'Figma'],
           aiTools: ['Codex', 'Antigravity'],
           aiTitle: 'AI-assisted development',
           aiNote:
@@ -207,7 +207,7 @@ export const translations = {
         type: 'E-commerce platform',
         number: '01',
         theme: 'peach',
-        image: '/screenshots/dgkeys.png',
+        image: '/screenshots/dgkeys.webp',
         description: 'ระบบร้านค้าดิจิทัลที่เน้นความแม่นยำและเสถียรภาพในการสั่งซื้อ',
         detail:
           'ระบบร้านขายคีย์เกมแบบ Full-stack ใช้ PostgreSQL transaction locking เพื่อป้องกันปัญหา Race Condition และสต็อกผิดพลาดระหว่าง Checkout',
@@ -221,7 +221,7 @@ export const translations = {
         type: 'Real-time collaboration',
         number: '02',
         theme: 'mint',
-        image: '/screenshots/co-board.png',
+        image: '/screenshots/co-board.webp',
         previewShape: 'wide',
         description: 'พื้นที่ทำงานร่วมกัน พร้อมมุมมองที่เหมาะกับทุกแผนงาน',
         detail:
@@ -299,14 +299,14 @@ export const translations = {
         {
           category: 'Backend',
           title: 'ตรรกะเบื้องหลังระบบที่มั่นคงและรวดเร็ว',
-          stack: ['Go / Gin', 'Node.js', 'Express', 'WebSockets'],
+          stack: ['Go / Gin', 'Python', 'Node.js', 'Express', 'WebSockets'],
           detail: 'พัฒนา REST APIs, ระบบรักษาความปลอดภัย/ยืนยันตัวตน และการสื่อสารแบบเรียลไทม์',
           mark: '02',
         },
         {
           category: 'Data & tools',
           title: 'รากฐานที่มั่นคงของระบบ',
-          stack: ['PostgreSQL', 'MariaDB', 'Redis', 'Docker', 'Git', 'Figma'],
+          stack: ['PostgreSQL', 'MariaDB', 'SQL', 'Redis', 'Docker', 'Git', 'Figma'],
           aiTools: ['Codex', 'Antigravity'],
           aiTitle: 'การพัฒนาโดยใช้ AI สนับสนุน',
           aiNote:

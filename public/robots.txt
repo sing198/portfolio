@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thanaphat-ku.is-a.dev/sitemap.xml

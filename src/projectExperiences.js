@@ -9,7 +9,7 @@ const experiences = {
             title: 'Find a game',
             instruction: 'Search for a title in “Search games…” or choose Steam, Epic Games or Origin.',
             expectation: 'The catalog changes to match the search and selected platform.',
-            imageSrc: '/screenshots/dgkeys.png',
+            imageSrc: '/screenshots/dgkeys.webp',
             imageLabel: 'DGKeys storefront and platform filters',
           },
           {
@@ -59,7 +59,7 @@ const experiences = {
             title: 'ค้นหาเกมที่สนใจ',
             instruction: 'ค้นหาชื่อเกมใน “Search games…” หรือเลือกแพลตฟอร์ม Steam, Epic Games หรือ Origin',
             expectation: 'รายการเกมเปลี่ยนตามคำค้นและแพลตฟอร์มที่เลือก',
-            imageSrc: '/screenshots/dgkeys.png',
+            imageSrc: '/screenshots/dgkeys.webp',
             imageLabel: 'หน้าร้าน DGKeys และตัวกรองแพลตฟอร์ม',
           },
           {

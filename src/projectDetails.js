@@ -3,7 +3,7 @@ import { getProjectExperience } from './projectExperiences'
 const projectDetails = {
   OMS: {
     gallery: [
-      { src: '/screenshots/dgkeys.png', label: { en: 'Storefront', th: 'หน้าร้าน' }, width: 1192, height: 946 },
+      { src: '/screenshots/dgkeys.webp', label: { en: 'Storefront', th: 'หน้าร้าน' }, width: 1192, height: 946 },
     ],
     caseStudy: {
       en: {
@@ -36,7 +36,7 @@ const projectDetails = {
   },
   'co-board': {
     gallery: [
-      { src: '/screenshots/co-board.png', label: { en: 'Workspace', th: 'พื้นที่ทำงาน' }, width: 1274, height: 952 },
+      { src: '/screenshots/co-board.webp', label: { en: 'Workspace', th: 'พื้นที่ทำงาน' }, width: 1274, height: 952 },
       { src: '/screenshots/co-board/board.png', label: { en: 'Kanban', th: 'Kanban' }, width: 1057, height: 1588 },
       { src: '/screenshots/co-board/board-list.png', label: { en: 'Table', th: 'ตาราง' }, width: 1280, height: 800 },
       { src: '/screenshots/co-board/board-calendar.png', label: { en: 'Calendar', th: 'ปฏิทิน' }, width: 1274, height: 1360 },
