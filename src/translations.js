@@ -74,7 +74,7 @@ export const translations = {
         type: 'GIS & land management',
         number: '03',
         theme: 'lilac',
-        image: '/screenshots/land/Admin_Home_Right.png',
+        image: '/screenshots/land/Admin_Home_Right.webp',
         previewShape: 'wide',
         description: 'Land Information Management System in Walailak Demonstration Community Area.',
         detail:
@@ -238,7 +238,7 @@ export const translations = {
         type: 'GIS & land management',
         number: '03',
         theme: 'lilac',
-        image: '/screenshots/land/Admin_Home_Right.png',
+        image: '/screenshots/land/Admin_Home_Right.webp',
         previewShape: 'wide',
         description: 'ระบบการจัดการข้อมูลที่ดินในพื้นที่ชุมชนสาธิตวลัยลักษณ์ (ส.ป.ก.)',
         detail:

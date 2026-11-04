@@ -37,12 +37,12 @@ const projectDetails = {
   'co-board': {
     gallery: [
       { src: '/screenshots/co-board.webp', label: { en: 'Workspace', th: 'พื้นที่ทำงาน' }, width: 1274, height: 952 },
-      { src: '/screenshots/co-board/board.png', label: { en: 'Kanban', th: 'Kanban' }, width: 1057, height: 1588 },
-      { src: '/screenshots/co-board/board-list.png', label: { en: 'Table', th: 'ตาราง' }, width: 1280, height: 800 },
-      { src: '/screenshots/co-board/board-calendar.png', label: { en: 'Calendar', th: 'ปฏิทิน' }, width: 1274, height: 1360 },
-      { src: '/screenshots/co-board/board-timeline.png', label: { en: 'Timeline', th: 'Timeline' }, width: 1274, height: 910 },
-      { src: '/screenshots/co-board/board-mindmap.png', label: { en: 'Mind Map', th: 'Mind Map' }, width: 1274, height: 939 },
-      { src: '/screenshots/co-board/board-sprint.png', label: { en: 'Sprint', th: 'Sprint' }, width: 1057, height: 1379 },
+      { src: '/screenshots/co-board/board.webp', label: { en: 'Kanban', th: 'Kanban' }, width: 1057, height: 1588 },
+      { src: '/screenshots/co-board/board-list.webp', label: { en: 'Table', th: 'ตาราง' }, width: 1280, height: 800 },
+      { src: '/screenshots/co-board/board-calendar.webp', label: { en: 'Calendar', th: 'ปฏิทิน' }, width: 1274, height: 1360 },
+      { src: '/screenshots/co-board/board-timeline.webp', label: { en: 'Timeline', th: 'Timeline' }, width: 1274, height: 910 },
+      { src: '/screenshots/co-board/board-mindmap.webp', label: { en: 'Mind Map', th: 'Mind Map' }, width: 1274, height: 939 },
+      { src: '/screenshots/co-board/board-sprint.webp', label: { en: 'Sprint', th: 'Sprint' }, width: 1057, height: 1379 },
     ],
     caseStudy: {
       en: {
@@ -77,9 +77,9 @@ const projectDetails = {
   },
   land: {
     gallery: [
-      { src: '/screenshots/land/Admin_Home_Right.png', label: { en: 'Admin', th: 'ผู้ดูแลระบบ' }, width: 2856, height: 1406 },
-      { src: '/screenshots/land/Land Reform Officer_Home_Right.png', label: { en: 'Land Reform Officer', th: 'เจ้าหน้าที่ปฏิรูปที่ดิน' }, width: 2864, height: 1404 },
-      { src: '/screenshots/land/Legal Officer Home_Right.png', label: { en: 'Administrative Officer', th: 'เจ้าหน้าที่งานธุรการ' }, width: 2854, height: 1408 },
+      { src: '/screenshots/land/Admin_Home_Right.webp', label: { en: 'Admin', th: 'ผู้ดูแลระบบ' }, width: 1600, height: 788 },
+      { src: '/screenshots/land/Land Reform Officer_Home_Right.webp', label: { en: 'Land Reform Officer', th: 'เจ้าหน้าที่ปฏิรูปที่ดิน' }, width: 1600, height: 784 },
+      { src: '/screenshots/land/Legal Officer Home_Right.webp', label: { en: 'Administrative Officer', th: 'เจ้าหน้าที่งานธุรการ' }, width: 1600, height: 789 },
     ],
     caseStudy: {
       en: {
