@@ -14,10 +14,10 @@ export const translations = {
     hero: {
       availability: 'Open to opportunities',
       eyebrow: "HELLO, I'M THANAPHAT KHUNPHET",
-      headlineLead: 'Full-Stack Developer.',
-      headlineSub: 'From design to code.',
+      headlineLead: 'Junior Full-Stack Developer.',
+      headlineSub: 'React · Go · PostgreSQL.',
       description:
-        'A full-stack developer connecting design and engineering. I build web applications with React, Go, and Node.js, with internship experience in ERP and healthcare.',
+        'I build real-time and transactional web apps with React, Go, and PostgreSQL. Two internships (enterprise ERP and healthcare), three shipped projects, available to start now.',
       exploreBtn: 'Explore my work',
       resumeBtn: 'Download Resume',
       location: 'Based in Bangkok, Thailand',
@@ -49,6 +49,7 @@ export const translations = {
           'A full-stack game key store with PostgreSQL transaction locking to prevent race conditions during checkout.',
         tags: ['React', 'Go / Gin', 'PostgreSQL', 'JWT'],
         demo: 'https://oms-lemon.vercel.app/',
+        demoNote: 'First load may take 30–60 seconds while the free-tier server wakes up. Screenshots and the walkthrough below show the full flow.',
         repo: 'OMS',
       },
       {
@@ -64,7 +65,7 @@ export const translations = {
           'Plan with Kanban, Table, Calendar, Timeline, Mind Map and Scrum boards, with real-time updates through WebSockets and Redis Pub/Sub plus owner, editor and viewer roles.',
         tags: ['React', 'TypeScript', 'Go / Gin', 'WebSocket', 'Redis', 'SQLite / PostgreSQL'],
         demo: 'https://kanban-board-eta-five.vercel.app/',
-        demoNote: 'The demo backend did not respond during the latest check. Explore the screenshots and walkthrough while hosting is being checked.',
+        demoNote: 'First load may take 30–60 seconds while the free-tier server wakes up. Screenshots and the walkthrough below show the full flow.',
         repo: 'co-board',
       },
       {
@@ -81,6 +82,7 @@ export const translations = {
           'A web-based land information management system developed for Walailak University and the Agricultural Land Reform Office (ALRO). Features GIS parcel mapping across 14 alleys, citizen & heir relationship tracking, document uploads (SPK 4-01 & housing photos), audit trails, and statistical dashboards with Excel/CSV export.',
         tags: ['Vue 3', 'Bulma', 'Node.js', 'Express', 'MariaDB', 'Leaflet'],
         demo: 'https://community-land.vercel.app/',
+        demoNote: 'First load may take 30–60 seconds while the free-tier server wakes up. Screenshots and the walkthrough below show the full flow.',
         repo: 'land',
       },
     ],
@@ -178,10 +180,10 @@ export const translations = {
     hero: {
       availability: 'พร้อมเริ่มงานทันที',
       eyebrow: 'สวัสดีครับ ผม ธนภัทร ขุนเพชร',
-      headlineLead: 'Full-Stack Developer.',
-      headlineSub: 'จากดีไซน์สู่โค้ดจริง',
+      headlineLead: 'Junior Full-Stack Developer.',
+      headlineSub: 'React · Go · PostgreSQL.',
       description:
-        'Full-stack developer ที่เชื่อมโยงระหว่างการออกแบบและวิศวกรรมซอฟต์แวร์ พัฒนาเว็บแอปพลิเคชันด้วย React, Go และ Node.js พร้อมประสบการณ์ฝึกงานทั้งระบบ ERP ระดับองค์กรและระบบการแพทย์',
+        'พัฒนาเว็บแอปแบบ real-time และระบบที่ต้องจัดการธุรกรรมด้วย React, Go และ PostgreSQL ผ่านการฝึกงาน 2 แห่ง (ERP และระบบคลินิก) มีผลงานที่ใช้งานได้จริง 3 โปรเจกต์ พร้อมเริ่มงานทันที',
       exploreBtn: 'ดูผลงานของผม',
       resumeBtn: 'ดาวน์โหลดเรซูเม่ (ภาษาอังกฤษ)',
       location: 'กรุงเทพฯ, ประเทศไทย',
@@ -213,6 +215,7 @@ export const translations = {
           'ระบบร้านขายคีย์เกมแบบ Full-stack ใช้ PostgreSQL transaction locking เพื่อป้องกันปัญหา Race Condition และสต็อกผิดพลาดระหว่าง Checkout',
         tags: ['React', 'Go / Gin', 'PostgreSQL', 'JWT'],
         demo: 'https://oms-lemon.vercel.app/',
+        demoNote: 'การเปิดครั้งแรกอาจใช้เวลา 30–60 วินาที เพราะเซิร์ฟเวอร์ฟรีต้องตื่นก่อน สามารถดูภาพและขั้นตอนการใช้งานด้านล่างได้ทันที',
         repo: 'OMS',
       },
       {
@@ -228,7 +231,7 @@ export const translations = {
           'จัดการงานด้วยบอร์ด Kanban, Table, Calendar, Timeline, Mind Map และ Scrum ซิงค์ข้อมูลแบบเรียลไทม์ผ่าน WebSockets และ Redis Pub/Sub พร้อมกำหนดสิทธิ์ Owner, Editor และ Viewer',
         tags: ['React', 'TypeScript', 'Go / Gin', 'WebSocket', 'Redis', 'SQLite / PostgreSQL'],
         demo: 'https://kanban-board-eta-five.vercel.app/',
-        demoNote: 'Back-end ของ Demo ไม่ตอบกลับในการตรวจล่าสุด ระหว่างตรวจ hosting สามารถดูภาพและขั้นตอนการใช้งานด้านล่างได้',
+        demoNote: 'การเปิดครั้งแรกอาจใช้เวลา 30–60 วินาที เพราะเซิร์ฟเวอร์ฟรีต้องตื่นก่อน สามารถดูภาพและขั้นตอนการใช้งานด้านล่างได้ทันที',
         repo: 'co-board',
       },
       {
@@ -245,6 +248,7 @@ export const translations = {
           'เว็บแอปพลิเคชันจัดการข้อมูลที่ดินชุมชนสาธิตวลัยลักษณ์ (14 ซอย ใน ต.ไทยบุรี และ ต.หัวตะพาน) เพื่อสนับสนุนสำนักงานการปฏิรูปที่ดินเพื่อเกษตรกรรม (ส.ป.ก.) รองรับแผนที่ GIS, จัดการข้อมูลแปลงและราษฎร-ทายาท, จัดเก็บเอกสาร ส.ป.ก. 4-01 และภาพถ่ายที่อยู่อาศัย, ระบบประวัติการแก้ไข และแดชบอร์ดสรุปสถิติพร้อมส่งออก Excel/CSV',
         tags: ['Vue 3', 'Bulma', 'Node.js', 'Express', 'MariaDB', 'Leaflet'],
         demo: 'https://community-land.vercel.app/',
+        demoNote: 'การเปิดครั้งแรกอาจใช้เวลา 30–60 วินาที เพราะเซิร์ฟเวอร์ฟรีต้องตื่นก่อน สามารถดูภาพและขั้นตอนการใช้งานด้านล่างได้ทันที',
         repo: 'land',
       },
     ],

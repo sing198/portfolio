@@ -17,14 +17,14 @@ export default function CaseStudyDialog({ project, lang, onClose, shareUrl }) {
     eyebrow: 'เบื้องหลังโปรเจกต์', close: 'ปิดกรณีศึกษา', context: 'บริบท',
     contribution: 'สิ่งที่รับผิดชอบ', challenge: 'โจทย์ที่ต้องแก้',
     decisions: 'การตัดสินใจในการพัฒนา', outcome: 'ผลและการตรวจสอบ',
-    evidence: 'หลักฐานจากโปรเจกต์', limits: 'ขอบเขตและข้อจำกัด',
+    evidence: 'หลักฐานจากโปรเจกต์', limits: 'ขั้นตอนถัดไป',
     code: 'ดูซอร์สโค้ด', demo: 'ลองใช้งาน',
     copy: 'คัดลอกลิงก์', copied: 'คัดลอกลิงก์แล้ว', copyError: 'คัดลอกไม่สำเร็จ กรุณาคัดลอก URL ของหน้านี้',
   } : {
     eyebrow: 'Behind the project', close: 'Close case study', context: 'Context',
     contribution: 'My contribution', challenge: 'The challenge',
     decisions: 'Development decisions', outcome: 'Results & validation',
-    evidence: 'Project evidence', limits: 'Scope and limitations',
+    evidence: 'Project evidence', limits: 'What I would build next',
     code: 'Read the code', demo: 'Live demo',
     copy: 'Copy link', copied: 'Link copied', copyError: 'Couldn’t copy. Copy this page’s URL.',
   }

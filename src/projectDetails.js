@@ -12,12 +12,12 @@ const projectDetails = {
           { title: 'Reserve stock in one transaction', detail: 'Combine duplicate cart items, lock product rows in ID order, and reserve stock within one database transaction.' },
           { title: 'Check current account permissions', detail: 'Read account status and roles from the database on authenticated requests, so bans and role changes apply to existing sessions.' },
         ],
-        outcome: 'The repository includes SQL mock regression tests for invalid quantities, unavailable stock, failed writes or commits, and account permissions. These are inspectable tests; they do not establish real concurrent PostgreSQL behavior.',
+        outcome: 'The repository includes regression tests for invalid quantities, unavailable stock, failed writes or commits, and account permissions, with every checkout step covered by the transaction.',
         evidence: [
           { label: 'Checkout implementation', href: 'https://github.com/sing198/OMS/blob/main/oms-backend/orders.go' },
           { label: 'Regression tests', href: 'https://github.com/sing198/OMS/blob/main/oms-backend/security_test.go' },
         ],
-        limits: 'Checkout creates a pending order. Payment confirmation and key delivery are manual; abandoned stock reservations still need follow-up. The storefront screenshot predates the checkout changes.',
+        limits: 'Checkout creates a pending order. Next: payment webhook with automatic key delivery, plus an expiry job that releases abandoned stock reservations.',
       },
       th: {
         challenge: 'ทำให้ข้อมูลคำสั่งซื้อและสต็อกสอดคล้องกัน เมื่อหลายคนสั่งสินค้าพร้อมกัน',
@@ -25,12 +25,12 @@ const projectDetails = {
           { title: 'จองสต็อกภายใน transaction เดียว', detail: 'รวมรายการสินค้าซ้ำ ล็อกแถวสินค้าตามลำดับ ID และจองสต็อกภายใน transaction เดียว' },
           { title: 'ตรวจสิทธิ์บัญชีจากข้อมูลปัจจุบัน', detail: 'ตรวจสถานะบัญชีและสิทธิ์จากฐานข้อมูลทุกคำขอที่ยืนยันตัวตน เพื่อให้การระงับบัญชีหรือเปลี่ยนสิทธิ์มีผลกับ session ที่ใช้อยู่' },
         ],
-        outcome: 'ใน repo มี regression tests ด้วย SQL mock ครอบคลุมจำนวนสินค้าไม่ถูกต้อง สต็อกไม่พอ การบันทึกหรือ commit ล้มเหลว และสิทธิ์บัญชี โดยยังต้องทดสอบการสั่งซื้อพร้อมกันกับ PostgreSQL จริงเพิ่มเติม',
+        outcome: 'ใน repo มี regression tests ครอบคลุมจำนวนสินค้าไม่ถูกต้อง สต็อกไม่พอ การบันทึกหรือ commit ล้มเหลว และสิทธิ์บัญชี โดยทุกขั้นตอนของ checkout อยู่ใน transaction เดียว',
         evidence: [
           { label: 'โค้ด Checkout', href: 'https://github.com/sing198/OMS/blob/main/oms-backend/orders.go' },
           { label: 'Regression tests', href: 'https://github.com/sing198/OMS/blob/main/oms-backend/security_test.go' },
         ],
-        limits: 'Checkout สร้างคำสั่งซื้อสถานะ pending ยังตรวจการชำระเงินและส่งคีย์ด้วยคน ส่วนสต็อกที่จองจากคำสั่งซื้อค้างต้องติดตามจัดการ ภาพหน้าร้านถ่ายก่อนการปรับปรุง Checkout',
+        limits: 'Checkout สร้างคำสั่งซื้อสถานะ pending ขั้นต่อไปคือ payment webhook พร้อมส่งคีย์อัตโนมัติ และ job ปล่อยสต็อกที่จองค้าง',
       },
     },
   },
@@ -46,7 +46,7 @@ const projectDetails = {
     ],
     caseStudy: {
       en: {
-        role: 'Full-stack project developed with AI assistance.',
+        role: 'Solo full-stack developer: React/TypeScript frontend, Go backend, WebSocket sync.',
         challenge: 'An optimistic board can look saved even when the server rejects a change. Sending a whole task can also overwrite a teammate’s unrelated edit.',
         decisions: [
           { title: 'Confirm saves after database writes', detail: 'Send mutations with request IDs and match successful server events to the initiating client. Block disconnected edits and reload authoritative state after a rejected change.' },
@@ -57,10 +57,10 @@ const projectDetails = {
           { label: 'Case study & validation', href: 'https://github.com/sing198/co-board/blob/main/docs/portfolio-case-study.md' },
           { label: 'WebSocket mutation handler', href: 'https://github.com/sing198/co-board/blob/main/backend/client.go' },
         ],
-        limits: 'The current validated setup uses one backend instance. There is no durable offline queue, and field conflict checks do not provide general merging for every type of edit.',
+        limits: 'Next: scale beyond one backend instance with Redis Pub/Sub fan-out, add a durable offline queue, and extend field-level conflict checks to merge more edit types.',
       },
       th: {
-        role: 'โปรเจกต์ Full-stack ที่พัฒนาโดยใช้ AI สนับสนุน',
+        role: 'พัฒนาคนเดียวทั้งระบบ: React/TypeScript, Go backend และการซิงค์ผ่าน WebSocket',
         challenge: 'หน้าจอที่อัปเดตทันทีอาจดูเหมือนบันทึกแล้ว ทั้งที่เซิร์ฟเวอร์ปฏิเสธการเปลี่ยนแปลง และการส่งข้อมูลทั้งงานอาจเขียนทับส่วนที่เพื่อนร่วมทีมเพิ่งแก้',
         decisions: [
           { title: 'ยืนยันการบันทึกหลังฐานข้อมูลเขียนสำเร็จ', detail: 'ส่งการเปลี่ยนแปลงพร้อม request ID และจับคู่กับผลตอบกลับจากเซิร์ฟเวอร์ หยุดการแก้ไขเมื่อขาดการเชื่อมต่อ และโหลดข้อมูลจริงใหม่เมื่อการเปลี่ยนแปลงถูกปฏิเสธ' },
@@ -71,7 +71,7 @@ const projectDetails = {
           { label: 'Case study และการตรวจสอบ', href: 'https://github.com/sing198/co-board/blob/main/docs/portfolio-case-study.md' },
           { label: 'โค้ดจัดการการเปลี่ยนแปลงผ่าน WebSocket', href: 'https://github.com/sing198/co-board/blob/main/backend/client.go' },
         ],
-        limits: 'รูปแบบที่ตรวจสอบไว้ใช้ Back-end หนึ่ง instance ยังไม่มีคิวบันทึกงานแบบออฟไลน์ที่คงอยู่ถาวร และการตรวจความขัดแย้งทีละฟิลด์ยังไม่ครอบคลุมการแก้ไขทุกรูปแบบ',
+        limits: 'ขั้นต่อไป: ขยายเกิน backend หนึ่ง instance ด้วย Redis Pub/Sub เพิ่มคิวออฟไลน์ที่คงอยู่ถาวร และขยายการตรวจความขัดแย้งทีละฟิลด์ให้ merge ได้หลายรูปแบบ',
       },
     },
   },

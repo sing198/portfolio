@@ -38,7 +38,7 @@ function App() {
     : `${t.hero.name} — Full-Stack Developer`
   const c = lang === 'th' ? {
     menu: 'เมนู', close: 'ปิดเมนู',
-    title: ['จากดีไซน์', 'สู่โค้ดจริง.'], subtitle: 'คิดอย่างใส่ใจ พัฒนาให้ใช้งานได้จริง',
+    title: ['Junior Full-Stack Developer', 'React · Go.'], subtitle: 'พัฒนาเว็บแอป real-time และระบบที่ต้องจัดการธุรกรรม ฝึกงานมาแล้ว 2 แห่ง พร้อมเริ่มงานทันที',
     intro: ['ดีไซน์ที่คิดมาอย่างดี.', 'โค้ดที่ทำงานได้จริง.'],
     highlights: 'ดูไฮไลท์ผลงาน.', caseStudy: 'อ่าน Case Study', work: ['ผลงานที่สร้าง.', 'ปัญหาที่แก้.'],
     focus: 'แนวคิดเบื้องหลัง', stack: 'เทคโนโลยีที่ใช้', education: 'การศึกษา',
@@ -48,7 +48,7 @@ function App() {
     highlightTitles: ['Checkout ที่จัดการข้อมูลอย่างรอบคอบ.', 'พื้นที่เดียว วางแผนได้หลายรูปแบบ.', 'ข้อมูลที่ดิน มองเห็นได้บนแผนที่.'],
   } : {
     menu: 'Menu', close: 'Close menu',
-    title: ['From design.', 'To working code.'], subtitle: 'Thoughtfully considered. Carefully built.',
+    title: ['Junior Full-Stack Developer', 'React · Go.'], subtitle: 'I build real-time and transactional web apps. Two internships, three shipped projects, ready to start now.',
     intro: ['Considered design.', 'Code that delivers.'],
     highlights: 'Get the highlights.', caseStudy: 'Read case study', work: ['Made to work.', 'Built to solve.'],
     focus: 'The thinking behind it', stack: 'Built with', education: 'Education',
