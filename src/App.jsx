@@ -3,7 +3,6 @@ import { Analytics } from '@vercel/analytics/react'
 import { EMAIL, GITHUB, translations } from './translations'
 import { getProjectDetails } from './projectDetails'
 import ProjectGallery from './components/ProjectGallery'
-import ProjectWalkthrough from './components/ProjectWalkthrough'
 import CaseStudyDialog from './components/CaseStudyDialog'
 import CopyButton from './components/CopyButton'
 import useCaseStudyRoute from './hooks/useCaseStudyRoute'
@@ -39,23 +38,21 @@ function App() {
   const c = lang === 'th' ? {
     menu: 'เมนู', close: 'ปิดเมนู',
     title: ['Junior Full‑Stack Developer', 'ตั้งแต่ Frontend ถึง Backend.'], subtitle: 'Full-stack developer ที่พัฒนาเว็บแอปครบทั้ง front-end และ back-end เช่น ร้านขายคีย์เกมด้วย Go + PostgreSQL, บอร์ดทำงานร่วมกันแบบ real-time และระบบจัดการที่ดินบนแผนที่ GIS',
-    intro: ['ดีไซน์ที่คิดมาอย่างดี.', 'โค้ดที่ทำงานได้จริง.'],
-    highlights: 'ดูไฮไลท์ผลงาน.', caseStudy: 'อ่าน Case Study', work: ['ผลงานที่สร้าง.', 'ปัญหาที่แก้.'],
+    intro: ['เกี่ยวกับผม', 'บัณฑิตไอที สายฟูลสแตก'],
+    caseStudy: 'อ่าน Case Study', work: ['ผลงานที่เลือกมา', 'สามระบบ ทำครบทั้งระบบ'],
     focus: 'แนวคิดเบื้องหลัง', stack: 'เทคโนโลยีที่ใช้', education: 'การศึกษา',
-    toolkit: ['เครื่องมือที่ใช่.', 'สำหรับทุกส่วนของงาน.'], contact: ['ไอเดียถัดไปของคุณ.', 'มาสร้างด้วยกัน.'],
+    toolkit: ['ทักษะ', 'ตั้งแต่ Frontend ถึงฐานข้อมูล'], contact: ['พร้อมร่วมงานแบบ Full-time', 'คุยกันได้เลย'],
     resume: 'ดาวน์โหลดเรซูเม่', navigation: 'ส่วนต่าง ๆ ของเว็บไซต์', connect: 'ช่องทางติดต่อ',
     copyEmail: 'คัดลอกอีเมล', emailCopied: 'คัดลอกอีเมลแล้ว', copyEmailError: 'คัดลอกไม่สำเร็จ กรุณาเลือกอีเมลแล้วคัดลอก',
-    highlightTitles: ['Checkout ที่จัดการข้อมูลอย่างรอบคอบ.', 'พื้นที่เดียว วางแผนได้หลายรูปแบบ.', 'ข้อมูลที่ดิน มองเห็นได้บนแผนที่.'],
   } : {
     menu: 'Menu', close: 'Close menu',
     title: ['Junior Full‑Stack Developer', 'Frontend to backend.'], subtitle: 'Full-stack developer who builds web apps end to end: a Go + PostgreSQL online store with safe checkout, a real-time collaborative board, and a GIS land-records system.',
-    intro: ['Considered design.', 'Code that delivers.'],
-    highlights: 'Get the highlights.', caseStudy: 'Read case study', work: ['Made to work.', 'Built to solve.'],
+    intro: ['About me.', 'IT graduate, full-stack builder.'],
+    caseStudy: 'Read case study', work: ['Selected projects.', 'Three apps, built end to end.'],
     focus: 'The thinking behind it', stack: 'Built with', education: 'Education',
-    toolkit: ['The right tools.', 'For every layer.'], contact: ['Your next idea.', 'Let’s build it.'],
+    toolkit: ['Skills.', 'Frontend to database.'], contact: ['Open to full-time roles.', 'Let’s talk.'],
     resume: 'Download resume', navigation: 'Explore the portfolio', connect: 'Connect',
     copyEmail: 'Copy email', emailCopied: 'Email copied', copyEmailError: 'Couldn’t copy. Select the email and copy it.',
-    highlightTitles: ['A checkout built around consistency.', 'One workspace. More ways to plan.', 'Land records. Right on the map.'],
   }
 
   useEffect(() => {
@@ -126,12 +123,10 @@ function App() {
       <section className="hero" id="home">
         <div className="hero-heading container"><img className="hero-portrait" src="/profile.jpg" alt={t.hero.name} width="104" height="104" fetchPriority="high" /><p className="hero-role"><span>{t.hero.name}</span><span>Full-Stack Developer</span></p><h1>{c.title[0]}<br /><span>{c.title[1]}</span></h1><p className="hero-subtitle">{c.subtitle}</p><div className="hero-actions"><a className="button" href="#projects">{t.hero.exploreBtn}</a><a className="text-link" href="/Resume_Thanaphat_Khunphet.pdf" download>{c.resume}<Arrow /></a></div><div className="hero-meta"><span className="hero-availability"><i className="status-dot" />{t.hero.availability}</span><span>{t.hero.location}</span></div></div>
       </section>
-      <section className="highlights-section section-space"><div className="container"><div className="section-heading reveal"><h2>{c.highlights}</h2><a href="#projects" className="text-link">{t.nav[1][1]}<Arrow /></a></div><div className="highlight-grid">{projects.map((project, index) => <button type="button" className={`highlight-card reveal ${project.theme}`} key={project.repo} onClick={() => openCaseStudy(project.repo)} aria-haspopup="dialog" aria-label={`${c.caseStudy}: ${project.name}`}><div className="highlight-copy"><p className="eyebrow">{project.name}</p><h3>{c.highlightTitles[index]}</h3></div><div className="highlight-visual"><ProjectGallery project={project} compact lang={lang} /></div><span className="highlight-link">{c.caseStudy}<span className="plus-icon" aria-hidden="true">+</span></span></button>)}</div></div></section>
-      <section className="manifesto section-space" id="intro"><div className="container reveal"><p className="eyebrow">Design meets engineering.</p><h2>{c.intro[0]}<br /><span>{c.intro[1]}</span></h2><p>{t.hero.description}</p><div className="foundation"><span>React</span><span>Go</span><span>Node.js</span></div></div></section>
+      <section className="manifesto section-space" id="intro"><div className="container reveal"><p className="eyebrow">{lang === 'th' ? 'เกี่ยวกับ' : 'About'}</p><h2>{c.intro[0]}<br /><span>{c.intro[1]}</span></h2><p>{t.hero.description}</p><div className="foundation"><span>React</span><span>Go</span><span>Node.js</span></div></div></section>
       <section className="work-section section-space" id="projects"><div className="container"><div className="section-heading reveal"><h2>{c.work[0]}<br /><span>{c.work[1]}</span></h2><p>{t.projectsSection.subheading}</p></div><div className="project-list">{projects.map(project => <article className={`project ${project.theme}`} id={`project-${project.repo}`} key={project.repo}>
         <div className="project-intro reveal"><p className="eyebrow">{project.type}</p><h3>{project.name}</h3><p className="project-lead">{project.description}</p><div className="project-links"><a className="button button-small" href={project.demo} target="_blank" rel="noreferrer" aria-label={`${t.projectsSection.liveDemo}: ${project.name}`}>{t.projectsSection.liveDemo}</a><button type="button" className="case-study-trigger" onClick={() => openCaseStudy(project.repo)} aria-haspopup="dialog" aria-label={`${c.caseStudy}: ${project.name}`}>{c.caseStudy}<Arrow /></button><a className="text-link" href={`${GITHUB}/${project.repo}`} target="_blank" rel="noreferrer" aria-label={`${t.projectsSection.sourceCode}: ${project.name}`}>{t.projectsSection.sourceCode}<Arrow /></a></div>{project.demoNote && <p className="project-demo-note">{project.demoNote}</p>}</div>
         <div className="reveal"><ProjectGallery project={project} lang={lang} /></div>
-        <div className="reveal"><ProjectWalkthrough project={project} lang={lang} /></div>
         <div className="project-information reveal"><div><p className="eyebrow">{c.focus}</p><p>{project.detail}</p><p className="project-context">{project.context}</p>{project.contribution && <p className="project-contribution">{project.contribution}</p>}</div><div><p className="eyebrow">{c.stack}</p><ul className="tags" aria-label={t.projectsSection.techStackAria}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul></div></div>
       </article>)}</div></div></section>
       <section className="experience-section section-space" id="about"><div className="container"><div className="section-heading reveal"><h2>{t.experienceSection.heading}<br /><span>{t.experienceSection.headingHighlight}</span></h2><p>{t.experienceSection.intro}</p></div><div className="experience-grid">{t.experienceSection.timeline.map(exp => <article className="experience-card reveal" key={exp.company}><div className="experience-date"><span>{exp.date}</span><span>{exp.badge}</span></div><p className="company">{exp.company}</p><h3>{exp.role}</h3><ul>{exp.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></article>)}<article className="education-card reveal"><img src="/profile.jpg" alt={t.hero.name} loading="lazy" /><div><p className="eyebrow">{c.education}</p><h3>{t.experienceSection.education.school}</h3><p>{t.experienceSection.education.major}</p><span>{t.experienceSection.education.period}</span></div></article></div></div></section>

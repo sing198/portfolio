@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef } from 'react'
 import CopyButton from './CopyButton'
 import ArchitectureDiagram from './ArchitectureDiagram'
+import ProjectWalkthrough from './ProjectWalkthrough'
 import './CaseStudyDialog.css'
 
 function ExternalArrow() {
@@ -83,6 +84,7 @@ export default function CaseStudyDialog({ project, lang, onClose, shareUrl }) {
             </li>)}
           </ol>
         </section>
+        <ProjectWalkthrough project={project} lang={lang} />
         <ArchitectureDiagram architecture={study.architecture} lang={lang} />
         <section className="case-study-section case-study-outcome">
           <div><h3>{labels.outcome}</h3><p>{study.outcome}</p></div>
