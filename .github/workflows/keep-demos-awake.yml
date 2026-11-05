@@ -1,0 +1,24 @@
+name: Keep Demo Backends Awake
+
+on:
+  schedule:
+    # Run every 14 minutes during 08:00–20:59 Bangkok time (01:00–13:59 UTC), Mon–Sat
+    - cron: '*/14 1-13 * * 1-6'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Wake up Render demo backends
+        run: |
+          for url in \
+            "https://kanban-board-fn74.onrender.com/" \
+            "https://alro-backend.onrender.com/" \
+            "https://oms-backend-api-kuii.onrender.com/products"
+          do
+            echo "Pinging $url ..."
+            code=$(curl -s -o /dev/null -m 65 -w "%{http_code}" "$url" || true)
+            echo "  -> HTTP $code"
+          done
