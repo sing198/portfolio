@@ -7,7 +7,7 @@ html:has(.portfolio-gallery-dialog[open]) { overflow: hidden; }
 .portfolio-gallery-chrome > small { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; padding-right: 28px; font-size: 10px; }
 .portfolio-gallery-screen { flex: 1; min-height: 0; background: #f5f5f7; }
 .peach .portfolio-gallery-screen { background: #0e1115; }
-.portfolio-gallery-screen > img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.portfolio-gallery-screen > img, .portfolio-gallery-screen > video { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .portfolio-gallery-trigger { display: block; position: relative; width: 100%; padding: 0; border: 0; border-radius: 14px; background: none; cursor: zoom-in; text-align: left; }
 .portfolio-gallery-expand { position: absolute; right: 16px; bottom: 16px; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #ffffff50; border-radius: 50%; background: #000000c4; color: #fff; box-shadow: 0 2px 10px #0002; transition: transform .2s ease, background .2s ease; pointer-events: none; }
 .portfolio-gallery-trigger:hover .portfolio-gallery-expand { transform: scale(1.08); background: #000; }
@@ -37,7 +37,7 @@ html:has(.portfolio-gallery-dialog[open]) { overflow: hidden; }
 .portfolio-gallery-close:hover, .portfolio-gallery-pagination button:hover { background: var(--section); }
 .portfolio-gallery-image-viewport { min-height: 0; overflow: auto; overflow-anchor: none; overscroll-behavior: contain; background: #f5f5f7; }
 .portfolio-gallery-image-viewport:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
-.portfolio-gallery-image-viewport > img { display: block; width: 100%; height: auto; }
+.portfolio-gallery-image-viewport > img, .portfolio-gallery-image-viewport > video { display: block; width: 100%; height: auto; }
 .portfolio-gallery-dialog-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-shrink: 0; padding: 12px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 .portfolio-gallery-pagination { display: flex; align-items: center; gap: 12px; }
 .portfolio-gallery-pagination > span { min-width: 45px; text-align: center; font-variant-numeric: tabular-nums; }

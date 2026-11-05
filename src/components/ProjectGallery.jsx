@@ -30,10 +30,20 @@ function GalleryIcon({ direction }) {
   </svg>
 }
 
+function SlideMedia({ slide, alt, width, height, onImageLoad, eager = false }) {
+  if (slide.video) {
+    return <video key={slide.src} src={slide.src} poster={slide.poster} width={width} height={height} autoPlay loop muted playsInline preload="metadata" aria-label={alt} />
+  }
+  return <img key={slide.src} src={slide.src} alt={alt} width={width} height={height} loading={eager ? undefined : 'lazy'} onLoad={onImageLoad} />
+}
+
 function BrowserFrame({ project, slide, copy, compact, dimensions, onImageLoad }) {
+  const alt = `${project.name} — ${slide.label || copy.screenshot}`
+  const width = dimensions?.width || slide.width || 1600
+  const height = dimensions?.height || slide.height || 1000
   return <div className={`portfolio-gallery-frame${compact ? ' is-compact' : ''}`}>
     <div className="portfolio-gallery-chrome" aria-hidden="true"><span /><span /><span /><small>{project.name}</small></div>
-    <div className="portfolio-gallery-screen"><img src={slide.src} alt={`${project.name} — ${slide.label || copy.screenshot}`} width={dimensions?.width || slide.width || 1600} height={dimensions?.height || slide.height || 1000} loading="lazy" onLoad={onImageLoad} /></div>
+    <div className="portfolio-gallery-screen"><SlideMedia slide={slide} alt={alt} width={width} height={height} onImageLoad={onImageLoad} /></div>
   </div>
 }
 
@@ -101,7 +111,7 @@ export default function ProjectGallery({ project, lang = 'en', compact = false }
     }}>
       <div className="portfolio-gallery-dialog-header"><div><p id={titleId}>{project.name}</p><span>{slide.label || copy.screenshot}</span></div><button type="button" className="portfolio-gallery-close" ref={closeRef} onClick={closeViewer} aria-label={copy.close}><span aria-hidden="true">×</span></button></div>
       <div className="portfolio-gallery-image-viewport" ref={viewportRef} tabIndex="0" role="region" aria-label={`${project.name} — ${slide.label || copy.screenshot}`}>
-        {isOpen && <img key={slide.src} src={slide.src} alt={`${project.name} — ${slide.label || copy.screenshot}`} width={imageDimensions?.width || slide.width || 1600} height={imageDimensions?.height || slide.height || 1000} onLoad={rememberDimensions} />}
+        {isOpen && <SlideMedia slide={slide} alt={`${project.name} — ${slide.label || copy.screenshot}`} width={imageDimensions?.width || slide.width || 1600} height={imageDimensions?.height || slide.height || 1000} onImageLoad={rememberDimensions} eager />}
       </div>
       <div className="portfolio-gallery-dialog-footer">
         <span className="portfolio-gallery-keyboard">{slides.length > 1 ? copy.keyboard : copy.screenshot}</span>

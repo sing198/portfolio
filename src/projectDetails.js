@@ -36,6 +36,7 @@ const projectDetails = {
   },
   'co-board': {
     gallery: [
+      { src: '/screenshots/co-board/realtime-sync.mp4', poster: '/screenshots/co-board.webp', video: true, label: { en: 'Real-time sync (2 tabs)', th: 'ซิงค์แบบเรียลไทม์ (2 แท็บ)' }, width: 1280, height: 776 },
       { src: '/screenshots/co-board.webp', label: { en: 'Workspace', th: 'พื้นที่ทำงาน' }, width: 1274, height: 952 },
       { src: '/screenshots/co-board/board.webp', label: { en: 'Kanban', th: 'Kanban' }, width: 1057, height: 1588 },
       { src: '/screenshots/co-board/board-list.webp', label: { en: 'Table', th: 'ตาราง' }, width: 1280, height: 800 },
