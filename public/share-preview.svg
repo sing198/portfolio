@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
-  <title id="title">Thanaphat Khunphet — Full-Stack Developer</title>
-  <desc id="description">A minimalist black portfolio preview with a blue tk. mark and the headline From design. To working code. Built with React, Go, and Node.js.</desc>
+  <title id="title">Thanaphat Khunphet — Junior Full-Stack Developer</title>
+  <desc id="description">Thanaphat Khunphet — Junior Full-Stack Developer. Frontend to backend. React, TypeScript, Vue 3, Go, Node.js, PostgreSQL.</desc>
   <rect width="1200" height="630" fill="#000000"/>
-  <g font-family="Arial, Helvetica, sans-serif">
+  <g font-family="-apple-system, BlinkMacSystemFont, Arial, Helvetica, sans-serif">
     <text x="80" y="111" fill="#2997ff" font-size="56" font-weight="700" letter-spacing="-5">tk.</text>
     <text x="1120" y="85" text-anchor="end" fill="#f5f5f7" font-size="25" font-weight="600" letter-spacing="-0.6">Thanaphat Khunphet</text>
-    <text x="1120" y="116" text-anchor="end" fill="#a1a1a6" font-size="19">Full-Stack Developer</text>
-    <text x="80" y="285" fill="#f5f5f7" font-size="94" font-weight="700" letter-spacing="-5.2">From design.</text>
-    <text x="80" y="392" fill="#a1a1a6" font-size="94" font-weight="700" letter-spacing="-5.2">To working code.</text>
-    <text x="84" y="450" fill="#f5f5f7" font-size="25" letter-spacing="-0.5">Thoughtfully considered. Carefully built.</text>
-    <text x="84" y="551" fill="#a1a1a6" font-size="21">React · Go · Node.js</text>
-    <text x="1120" y="551" text-anchor="end" fill="#2997ff" font-size="21">Portfolio</text>
+    <text x="1120" y="116" text-anchor="end" fill="#a1a1a6" font-size="19">Bangkok, Thailand</text>
+    <text x="80" y="278" fill="#f5f5f7" font-size="76" font-weight="700" letter-spacing="-3.8">Junior Full-Stack Developer</text>
+    <text x="80" y="372" fill="#a1a1a6" font-size="76" font-weight="700" letter-spacing="-3.8">Frontend to backend.</text>
+    <text x="84" y="442" fill="#f5f5f7" font-size="24" letter-spacing="-0.3">Online store with safe checkout · Real-time collaboration board · GIS land system</text>
+    <text x="84" y="551" fill="#a1a1a6" font-size="21">React · TypeScript · Vue 3 · Go · Node.js · PostgreSQL</text>
+    <text x="1120" y="551" text-anchor="end" fill="#2997ff" font-size="21">thanaphat-ku.is-a.dev</text>
   </g>
 </svg>
