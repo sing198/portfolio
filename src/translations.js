@@ -15,9 +15,9 @@ export const translations = {
       availability: 'Open to opportunities',
       eyebrow: "HELLO, I'M THANAPHAT KHUNPHET",
       headlineLead: 'Junior Full-Stack Developer.',
-      headlineSub: 'React · Go · PostgreSQL.',
+      headlineSub: 'Frontend to backend.',
       description:
-        'I build real-time and transactional web apps with React, Go, and PostgreSQL. Two internships (enterprise ERP and healthcare), three shipped projects, available to start now.',
+        'Working with React, TypeScript, Go, Node.js, and PostgreSQL. Internships at proALPHA (enterprise ERP) and GIS Group (healthcare), plus a senior project for Walailak University.',
       exploreBtn: 'Explore my work',
       resumeBtn: 'Download Resume',
       location: 'Based in Bangkok, Thailand',
@@ -181,9 +181,9 @@ export const translations = {
       availability: 'พร้อมเริ่มงานทันที',
       eyebrow: 'สวัสดีครับ ผม ธนภัทร ขุนเพชร',
       headlineLead: 'Junior Full-Stack Developer.',
-      headlineSub: 'React · Go · PostgreSQL.',
+      headlineSub: 'ตั้งแต่ Frontend ถึง Backend.',
       description:
-        'พัฒนาเว็บแอปแบบ real-time และระบบที่ต้องจัดการธุรกรรมด้วย React, Go และ PostgreSQL ผ่านการฝึกงาน 2 แห่ง (ERP และระบบคลินิก) มีผลงานที่ใช้งานได้จริง 3 โปรเจกต์ พร้อมเริ่มงานทันที',
+        'ทำงานกับ React, TypeScript, Go, Node.js และ PostgreSQL ฝึกงานที่ proALPHA (ERP) และ GIS Group (ระบบคลินิก) พร้อมโปรเจกต์จบของมหาวิทยาลัยวลัยลักษณ์',
       exploreBtn: 'ดูผลงานของผม',
       resumeBtn: 'ดาวน์โหลดเรซูเม่ (ภาษาอังกฤษ)',
       location: 'กรุงเทพฯ, ประเทศไทย',
