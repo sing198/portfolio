@@ -92,7 +92,7 @@ const projectDetails = {
           { title: 'Interactive GIS map & coordinate picker', detail: 'Built reusable Leaflet map components with satellite/road layer switching, parcel status color coding, and visual coordinate selection for parcel registration.' },
           { title: 'Relational data modeling with audit history', detail: 'Modeled 17 relational tables in MariaDB to manage citizen-heir relationships, land-use classifications (rubber, orchards, livestock), file attachments, and complete edit logs.' },
         ],
-        outcome: 'Delivered a responsive web application that speeds up parcel lookups to under 5 seconds, centralizes SPK 4-01 deeds and housing photos, and provides clear analytics on community land usage and encroachment.',
+        outcome: 'Delivered a responsive web application that speeds up parcel lookups to under 5 seconds and centralizes SPK 4-01 deeds and housing photos. The dashboard shows land use and encroachment statistics, with Excel and CSV export.',
         evidence: [
           { label: 'GIS map component', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/GisMap.vue' },
           { label: 'Coordinate picker', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/CoordinatePickerModal.vue' },
@@ -106,7 +106,7 @@ const projectDetails = {
           { title: 'แผนที่ GIS แบบโต้ตอบพร้อมเครื่องมือเลือกพิกัด', detail: 'ใช้ Leaflet แสดงแผนที่แปลงที่ดิน แยกสีตามสถานะ สลับชั้นดาวเทียม/ถนน และให้เจ้าหน้าที่คลิกหรือลากหมุดบนแผนที่เพื่อระบุพิกัด Lat/Long เข้าฟอร์มได้ทันที' },
           { title: 'ออกแบบฐานข้อมูลเชิงสัมพันธ์พร้อมประวัติการแก้ไข (Audit Trail)', detail: 'จัดโครงสร้าง 17 ตารางใน MariaDB เชื่อมโยงข้อมูลแปลงที่ดิน ราษฎร-ทายาท ประเภทการใช้ประโยชน์ (ยางพารา สวนผลไม้ ปศุสัตว์) เอกสารแนบ และบันทึกประวัติการเปลี่ยนแปลงทุกรายการ' },
         ],
-        outcome: 'ส่งมอบเว็บแอปพลิเคชันที่สืบค้นข้อมูลแปลงได้ภายใน 5 วินาที จัดเก็บไฟล์โฉนด ส.ป.ก. 4-01 และภาพถ่ายที่อยู่อาศัยเป็นระบบ พร้อมแดชบอร์ดสรุปสถิติและรายงานเพื่อส่งต่อให้ ส.ป.ก.',
+        outcome: 'ส่งมอบเว็บแอปที่ค้นหาข้อมูลแปลงได้ภายใน 5 วินาที และรวมเอกสาร ส.ป.ก. 4-01 กับภาพถ่ายที่อยู่อาศัยไว้ในระบบเดียว แดชบอร์ดสรุปสถิติการใช้ที่ดินและการบุกรุก พร้อมส่งออกรายงานเป็น Excel และ CSV เพื่อส่งต่อให้ ส.ป.ก.',
         evidence: [
           { label: 'คอมโพเนนต์แผนที่ GIS', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/GisMap.vue' },
           { label: 'ตัวเลือกพิกัด', href: 'https://github.com/sing198/land/blob/master/frontend/src/components/map/CoordinatePickerModal.vue' },
