@@ -1,4 +1,112 @@
 const experiences = {
+  'bangkok-commute-map': {
+    en: {
+      walkthrough: {
+        intro: 'Explore Bangkok commute zones from any office hub and compare 3 locations by True Monthly Cost.',
+        steps: [
+          {
+            id: 'pin',
+            title: 'Pick an office preset or move the pin',
+            instruction: 'Open the live demo (loads Asok automatically), switch to Silom or Rama 9, or click anywhere on the map to relocate the “งาน” pin.',
+            expectation: 'PostGIS finds the 3 nearest stations and colors reachable BTS/MRT/ARL zones green (≤ 20 min), yellow (21–35 min), or orange (36–45 min).',
+            imageSrc: '/screenshots/bangkok-commute-map.webp',
+            imageLabel: 'Bangkok Commute Map showing color-coded transit zones and highlighted rail route',
+          },
+          {
+            id: 'route',
+            title: 'Inspect a listing and its rail route',
+            instruction: 'Click any condo or apartment card in the right drawer, then toggle workdays between 22 days and Hybrid 12 days.',
+            expectation: 'The door-to-door rail route draws on the map, and True Monthly Cost (rent + rail + feeder) recalculates immediately.',
+            imageSrc: '/screenshots/bangkok-commute-map.webp',
+            imageLabel: 'Listing card breakdown with rent vs monthly commute cost and route polyline',
+          },
+          {
+            id: 'compare',
+            title: 'Compare 3 locations side by side',
+            instruction: 'Click “เทียบทำเล” on 2–3 listings (e.g. outer affordable vs inner CBD) and press “เปรียบเทียบเลย”.',
+            expectation: 'The comparison modal displays stacked Rent + Commute bars, monthly commute hours, and exact THB/month and hours/month trade-offs.',
+            imageSrc: '/screenshots/bangkok-commute-map/compare.webp',
+            imageLabel: '3-location True Monthly Cost & commute hours comparison modal',
+          },
+        ],
+        note: 'The live demo runs on Vercel + Supabase PostGIS with no login required. For local Redis cache HIT/MISS testing, run docker compose up -d using the README.',
+      },
+      architecture: {
+        intro: 'Spatial lookups run in PostGIS; shortest paths and Thai fare rules execute in Go with optional Redis caching.',
+        nodes: [
+          { id: 'browser', label: 'Commute Map UI', technology: 'React · TypeScript · Tailwind · Leaflet', description: 'Renders OpenStreetMap tiles, color-coded reachability circles, draggable office pin, active transit polylines, and the 3-location comparison modal.' },
+          { id: 'api', label: 'Commute API & Transit Graph', technology: 'Go · Gin · In-Memory Dijkstra', description: 'Loads 79 stations, 166 directed edges, and operator fare rules on startup. Runs Dijkstra with transfer penalties (+3/+6 min) and BTS/MRT/ARL fare calculations.' },
+          { id: 'database', label: 'Spatial Transit & Listings DB', technology: 'PostgreSQL 16 · PostGIS (Supabase)', description: 'Stores stations and 183 curated listings as GEOGRAPHY(Point, 4326) with GIST indexes for fast KNN (<->) and ST_DWithin queries.' },
+          { id: 'redis', label: 'Quantized Search Cache', technology: 'Redis 7 (Optional / Graceful Fallback)', description: 'Caches search responses keyed by ~100m quantized coordinates + filter params with 15-min TTL, returning X-Cache: HIT/MISS headers and degrading cleanly to PostGIS when unavailable.' },
+        ],
+        connections: [
+          { from: 'browser', to: 'api', label: 'REST API · X-Cache & X-Query-Time-Ms headers' },
+          { from: 'api', to: 'database', label: 'PostGIS KNN (<->) & ST_DWithin queries' },
+          { from: 'api', to: 'redis', label: 'Quantized coordinate cache (15m TTL)' },
+        ],
+        note: 'A Go seed CLI (cmd/seed) validates full graph connectivity via BFS and performs idempotent upserts with PostGIS-computed walk distances.',
+        evidence: [
+          { label: 'Dijkstra graph & Thai fare rules', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/transit/graph.go' },
+          { label: 'PostGIS spatial repository', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/commute/repository.go' },
+          { label: 'Quantized Redis cache & compare logic', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/commute/service.go' },
+          { label: 'PostGIS & Redis CI workflow', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/.github/workflows/ci.yml' },
+        ],
+      },
+    },
+    th: {
+      walkthrough: {
+        intro: 'สำรวจโซนเวลาเดินทางรอบย่านออฟฟิศในกรุงเทพฯ และเปรียบเทียบ 3 ทำเลด้วยค่าครองชีพรวมจริงต่อเดือน',
+        steps: [
+          {
+            id: 'pin',
+            title: 'เลือกย่านออฟฟิศหรือย้ายหมุดเอง',
+            instruction: 'เปิดหน้าเว็บ (โหลดโซนอโศกให้อัตโนมัติ) ลองสลับเป็นสีลมหรือพระราม 9 หรือคลิก/ลากหมุด “งาน” ไปยังจุดใดก็ได้บนแผนที่',
+            expectation: 'PostGIS หาสถานีใกล้สุด 3 แห่ง และระบายสีโซนสถานี BTS/MRT/ARL ที่ถึงทันเวลา (เขียว ≤ 20 นาที / เหลือง 21–35 นาที / ส้ม 36–45 นาที)',
+            imageSrc: '/screenshots/bangkok-commute-map.webp',
+            imageLabel: 'แผนที่ Bangkok Commute Map แสดงโซนสีเวลาเดินทางและเส้นทางรถไฟฟ้า',
+          },
+          {
+            id: 'route',
+            title: 'ดูเส้นทางและสลับวันเข้าออฟฟิศ',
+            instruction: 'คลิกการ์ดที่พักในแถบขวา แล้วลองเปลี่ยนวันทำงานระหว่าง 22 วัน กับ Hybrid 12 วัน',
+            expectation: 'แผนที่ลากเส้นทางจากที่พักผ่านรถไฟฟ้าถึงออฟฟิศ พร้อมอัปเดตค่าครองชีพรวมจริง (ค่าเช่า + ค่ารถไฟฟ้า + ค่าวินฯ) ทันที',
+            imageSrc: '/screenshots/bangkok-commute-map.webp',
+            imageLabel: 'การ์ดที่พักแสดงสัดส่วนค่าเช่ากับค่าเดินทางและเส้นทางบนแผนที่',
+          },
+          {
+            id: 'compare',
+            title: 'เปรียบเทียบ 3 ทำเลข้างกัน',
+            instruction: 'กดปุ่ม “เทียบทำเล” บนที่พัก 2–3 แห่ง (เช่น ย่านชานเมืองเทียบกับใกล้ CBD) แล้วกด “เปรียบเทียบเลย”',
+            expectation: 'หน้าต่างเปรียบเทียบแสดงกราฟแท่งค่าเช่า + ค่าเดินทาง ชั่วโมงเดินทางต่อเดือน และสรุปส่วนต่างเงินและเวลาที่ประหยัดได้ชัดเจน',
+            imageSrc: '/screenshots/bangkok-commute-map/compare.webp',
+            imageLabel: 'หน้าต่างเปรียบเทียบค่าครองชีพรวมและเวลาเดินทาง 3 ทำเล',
+          },
+        ],
+        note: 'เดโมออนไลน์รันบน Vercel + Supabase PostGIS กดเล่นได้ทันทีไม่ต้องล็อกอิน ส่วนการทดสอบ Redis Cache HIT/MISS ในเครื่องดูวิธีรัน docker compose ได้ใน README',
+      },
+      architecture: {
+        intro: 'ค้นหาเชิงพื้นที่ด้วย PostGIS คำนวณเส้นทางและค่าโดยสารไทยด้วย Dijkstra ใน Go พร้อมแคชด้วย Redis',
+        nodes: [
+          { id: 'browser', label: 'หน้าแผนที่และตารางเทียบทำเล', technology: 'React · TypeScript · Tailwind · Leaflet', description: 'แสดงแผนที่ OpenStreetMap วงโซนสีเวลาเดินทาง หมุดออฟฟิศแบบลากวางได้ เส้นทางรถไฟฟ้า และหน้าต่างเปรียบเทียบ 3 ทำเล' },
+          { id: 'api', label: 'API และกราฟรถไฟฟ้า', technology: 'Go · Gin · In-Memory Dijkstra', description: 'โหลด 79 สถานี 166 เส้นเชื่อม และตารางค่าโดยสารเข้าหน่วยความจำตอนเริ่มระบบ คำนวณเส้นทางเร็วสุดพร้อมเวลาเปลี่ยนสาย (+3/+6 นาที) และค่าโดยสาร BTS/MRT/ARL' },
+          { id: 'database', label: 'ฐานข้อมูลเชิงพื้นที่', technology: 'PostgreSQL 16 · PostGIS (Supabase)', description: 'เก็บพิกัดสถานีและที่พัก 183 แห่งแบบ GEOGRAPHY(Point, 4326) พร้อม GIST index สำหรับ KNN (<->) และ ST_DWithin' },
+          { id: 'redis', label: 'แคชผลลัพธ์ตามพิกัด', technology: 'Redis 7 (ทางเลือก / Graceful Fallback)', description: 'แคชผลค้นหาโดยปัดพิกัดความละเอียด ~100 เมตร (TTL 15 นาที) ส่ง header X-Cache: HIT/MISS และทำงานต่อผ่าน PostGIS ได้แม้ไม่มี Redis' },
+        ],
+        connections: [
+          { from: 'browser', to: 'api', label: 'REST API · แนบ X-Cache และ X-Query-Time-Ms' },
+          { from: 'api', to: 'database', label: 'PostGIS KNN (<->) และ ST_DWithin' },
+          { from: 'api', to: 'redis', label: 'แคชพิกัดแบบ Quantization (15 นาที)' },
+        ],
+        note: 'มี Go Seed CLI (cmd/seed) ตรวจความเชื่อมต่อกราฟครบทุกสถานีด้วย BFS และ upsert ข้อมูลซ้ำได้อย่างปลอดภัยพร้อมคำนวณระยะเดินด้วย PostGIS',
+        evidence: [
+          { label: 'กราฟ Dijkstra และกฎค่าโดยสาร', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/transit/graph.go' },
+          { label: 'PostGIS Spatial Repository', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/commute/repository.go' },
+          { label: 'Redis Quantization Cache และ Compare', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/commute/service.go' },
+          { label: 'GitHub Actions CI (PostGIS + Redis)', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/.github/workflows/ci.yml' },
+        ],
+      },
+    },
+  },
   OMS: {
     en: {
       walkthrough: {
