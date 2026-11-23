@@ -3,19 +3,20 @@ import { getProjectExperience } from './projectExperiences'
 const projectDetails = {
   'bangkok-commute-map': {
     gallery: [
-      { src: '/screenshots/bangkok-commute-map.webp', label: { en: 'Commute Zones & Transit Route', th: 'โซนเวลาเดินทางและเส้นทางรถไฟฟ้า' }, width: 1024, height: 640 },
+      { src: '/screenshots/bangkok-commute-map/demo.mp4', poster: '/screenshots/bangkok-commute-map.webp', video: true, label: { en: '25s Interactive Demo', th: 'เดโมการใช้งานจริง 25 วินาที' }, width: 1024, height: 704 },
+      { src: '/screenshots/bangkok-commute-map.webp', label: { en: 'Commute Zones & Redis HIT', th: 'โซนเวลาเดินทางและ Redis HIT' }, width: 1024, height: 640 },
       { src: '/screenshots/bangkok-commute-map/compare.webp', label: { en: '3-Location True-Cost Comparison', th: 'เปรียบเทียบค่าครองชีพรวม 3 ทำเล' }, width: 1024, height: 640 },
     ],
     caseStudy: {
       en: {
-        role: 'Solo full-stack developer: Go/Gin API, PostGIS spatial schema, Dijkstra transit engine, Redis cache, React/TypeScript + Leaflet UI.',
+        role: 'Solo full-stack developer: Go/Gin API, PostGIS spatial schema, Dijkstra transit engine, Upstash Redis cache, React/TypeScript + Leaflet UI.',
         challenge: 'Straight-line radius search fails in Bangkok because real commute times and monthly costs depend on BTS/MRT/ARL connectivity, interchange penalties, separate-operator fares, BTS extension surcharges, and first/last-mile access.',
         decisions: [
           { title: 'Combine PostGIS GIST spatial indexing with an in-memory Go transit graph', detail: 'Use PostGIS KNN (<->) on GEOGRAPHY(Point, 4326) to locate the 3 nearest stations to any office pin and ST_DWithin to filter listings in real meters, paired with a Go Dijkstra engine across 79 stations and 166 directed edges modeling Thai fare rules and transfer penalties (+3 min same-operator at Siam/Tao Poon, +6–7 min cross-system with separate tickets).' },
           { title: 'Rank and compare locations by True Monthly Cost', detail: 'Compute rent + round-trip rail fare + motorcycle taxi feeder cost (when beyond max walk distance) across configurable office days (e.g. 12-day hybrid vs 22-day full-time), plus monthly commute hours for 2–3 side-by-side locations.' },
-          { title: 'Coordinate-quantized Redis caching with graceful degradation', detail: 'Round office coordinates to ~100m precision to increase Redis hit rate, expose X-Cache and X-Query-Time-Ms headers in the UI, and degrade cleanly to PostGIS when Redis is not provisioned.' },
+          { title: 'Region-pinned Upstash Redis caching with coordinate quantization', detail: 'Round office coordinates to ~100m precision to increase hit rate, pin Vercel Functions to Singapore (sin1) beside Supabase PostGIS & Upstash Redis (cutting latency from ~2.2s cross-region to ~11–25 ms on HIT), expose X-Cache and X-Query-Time-Ms in the UI, and degrade cleanly when Redis is unavailable.' },
         ],
-        outcome: 'Deployed live on Vercel Services (React Vite UI + Go/Gin API) backed by Supabase PostGIS (79 stations, 183 real Bangkok condos & apartments sourced from OpenStreetMap + curated landmarks, plus free OSM office place search). Automated GitHub Actions CI runs unit tests for all Thai transit fare/transfer edge cases plus real PostGIS & Redis integration tests with race detection and seed idempotency verification.',
+        outcome: 'Deployed live on Vercel Services (sin1 Singapore: React Vite UI + Go/Gin API) backed by Supabase PostGIS (79 stations, 183 real Bangkok condos & apartments from OpenStreetMap + curated landmarks, free OSM office place search) and Upstash Redis (~11–25 ms cache HIT vs ~27–53 ms PostGIS MISS). GitHub Actions CI runs transit fare/transfer unit tests plus real PostGIS & Redis integration tests with race detection and seed idempotency verification.',
         evidence: [
           { label: 'PostGIS & Redis CI in GitHub Actions', href: 'https://github.com/sing198/bangkok-commute-map/actions' },
           { label: 'Dijkstra routing & Thai fare engine (Go)', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/transit/graph.go' },
@@ -26,14 +27,14 @@ const projectDetails = {
         limits: 'Building names and coordinates come from OpenStreetMap and curated Bangkok landmarks, while monthly rents are market-reference estimates for demo stability. A next step is integrating live rental listing feeds.',
       },
       th: {
-        role: 'พัฒนาคนเดียวทั้งระบบ: Go/Gin API, PostGIS Spatial DB, กราฟ Dijkstra คำนวณเส้นทางรถไฟฟ้า, Redis Cache และ React/TypeScript + Leaflet',
+        role: 'พัฒนาคนเดียวทั้งระบบ: Go/Gin API, PostGIS Spatial DB, กราฟ Dijkstra คำนวณเส้นทางรถไฟฟ้า, Upstash Redis Cache และ React/TypeScript + Leaflet',
         challenge: 'การค้นหาที่พักในกรุงเทพฯ แบบรัศมีวงกลมไม่ตรงกับความจริง เพราะเวลาและค่าใช้จ่ายขึ้นอยู่กับโครงข่าย BTS/MRT/ARL จุดเปลี่ยนสาย ค่าโดยสารแยกค่าย ส่วนต่อขยาย และระยะเดินถึงสถานี',
         decisions: [
           { title: 'ผสาน PostGIS GIST Index เข้ากับ Transit Graph (Dijkstra) ใน Go', detail: 'ใช้ PostGIS KNN (<->) บน GEOGRAPHY(Point, 4326) หาสถานีใกล้ออฟฟิศ 3 แห่งแรก และ ST_DWithin กรองที่พักเป็นเมตรจริง ร่วมกับ Dijkstra ใน Go บน 79 สถานี 166 เส้นเชื่อมที่คิดเวลาเปลี่ยนสาย (+3 นาทีในค่ายเดียวที่สยาม/เตาปูน, +6–7 นาทีข้ามค่ายพร้อมคิดค่าโดยสารแยกใบ) และส่วนต่อขยาย BTS (+15฿ cap 62฿)' },
           { title: 'จัดอันดับและเปรียบเทียบด้วย “ค่าครองชีพรวมจริงต่อเดือน”', detail: 'คำนวณค่าเช่า + ค่ารถไฟฟ้าไป-กลับ + ค่าวินมอเตอร์ไซค์อัตโนมัติเมื่อเกินระยะเดิน ตามจำนวนวันเข้าออฟฟิศ (เช่น Hybrid 12 วัน หรือ 22 วัน) พร้อมหน้าเทียบ 2–3 ทำเลข้างกันให้เห็นส่วนต่างเงินและชั่วโมงเดินทางต่อเดือน' },
-          { title: 'แคชผลลัพธ์ด้วย Redis แบบ Coordinate Quantization พร้อม Graceful Fallback', detail: 'ปัดพิกัดออฟฟิศความละเอียด ~100 เมตรเพื่อเพิ่ม Cache Hit Rate แสดง header X-Cache และ X-Query-Time-Ms บนหน้าจอ และทำงานต่อผ่าน PostGIS ได้โดยไม่ล่มเมื่อไม่มี Redis' },
+          { title: 'แคชด้วย Upstash Redis แบบ Coordinate Quantization + ปักหมุด Region sin1', detail: 'ปัดพิกัดออฟฟิศความละเอียด ~100 เมตรเพื่อเพิ่ม Cache Hit Rate ปักหมุด Vercel Functions ไว้ที่สิงคโปร์ (sin1) คู่กับ Supabase PostGIS และ Upstash Redis ลดเวลาตอบกลับจาก ~2.2 วิ เหลือ ~11–25 ms เมื่อ HIT พร้อมแสดง header X-Cache บนหน้าจอและ fallback สู่ PostGIS ได้โดยไม่ล่ม' },
         ],
-        outcome: 'Deploy ใช้งานจริงบน Vercel Services (React UI + Go/Gin API) เชื่อมต่อ Supabase PostGIS (79 สถานี, 183 คอนโดและอพาร์ตเมนต์จริงใน กทม. จาก OpenStreetMap + ชุด Curated พร้อมช่องค้นหาสถานที่ด้วย OSM ฟรี) และ GitHub Actions CI ที่รัน Unit Test กฎค่าโดยสาร/จุดเปลี่ยนสาย รวมถึง Integration Test บน PostGIS + Redis จริงพร้อม -race และการตรวจ seed ซ้ำแบบ idempotent',
+        outcome: 'Deploy ใช้งานจริงบน Vercel Services (sin1 สิงคโปร์: React UI + Go/Gin API) เชื่อมต่อ Supabase PostGIS (79 สถานี, 183 คอนโดและอพาร์ตเมนต์จริงใน กทม. จาก OpenStreetMap + ชุด Curated พร้อมช่องค้นหาสถานที่ด้วย OSM ฟรี) และ Upstash Redis (HIT ~11–25 ms / PostGIS MISS ~27–53 ms) พร้อม GitHub Actions CI ที่รัน Unit Test กฎค่าโดยสาร/จุดเปลี่ยนสาย และ Integration Test บน PostGIS + Redis จริงพร้อม -race',
         evidence: [
           { label: 'ผลทดสอบ PostGIS & Redis บน GitHub Actions', href: 'https://github.com/sing198/bangkok-commute-map/actions' },
           { label: 'โค้ด Dijkstra และสูตรค่าโดยสาร BTS/MRT/ARL', href: 'https://github.com/sing198/bangkok-commute-map/blob/main/backend/internal/transit/graph.go' },
