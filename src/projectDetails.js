@@ -9,13 +9,14 @@ const projectDetails = {
     ],
     caseStudy: {
       en: {
-        role: 'Solo full-stack developer: Go/Gin API, PostGIS spatial schema, Dijkstra transit engine, Upstash Redis cache, React/TypeScript + Leaflet UI.',
+        role: 'I built the React map, Go routing engine, and PostGIS search and deployed the full app.',
         challenge: 'Straight-line radius search fails in Bangkok because real commute times and monthly costs depend on BTS/MRT/ARL connectivity, interchange penalties, separate-operator fares, BTS extension surcharges, and first/last-mile access.',
         decisions: [
           { title: 'Combine PostGIS GIST spatial indexing with an in-memory Go transit graph', detail: 'Use PostGIS KNN (<->) on GEOGRAPHY(Point, 4326) to locate the 3 nearest stations to any office pin and ST_DWithin to filter listings in real meters, paired with a Go Dijkstra engine across 79 stations and 166 directed edges modeling Thai fare rules and transfer penalties (+3 min same-operator at Siam/Tao Poon, +6–7 min cross-system with separate tickets).' },
           { title: 'Rank and compare locations by True Monthly Cost', detail: 'Compute rent + round-trip rail fare + motorcycle taxi feeder cost (when beyond max walk distance) across configurable office days (e.g. 12-day hybrid vs 22-day full-time), plus monthly commute hours for 2–3 side-by-side locations.' },
           { title: 'Region-pinned Upstash Redis caching with coordinate quantization', detail: 'Round office coordinates to ~100m precision to increase hit rate, pin Vercel Functions to Singapore (sin1) beside Supabase PostGIS & Upstash Redis (cutting latency from ~2.2s cross-region to ~11–25 ms on HIT), expose X-Cache and X-Query-Time-Ms in the UI, and degrade cleanly when Redis is unavailable.' },
         ],
+        outcomeSummary: 'The live app compares 183 properties across 79 rail stations. GitHub Actions tests fares and transfers and runs integration tests against PostGIS and Redis.',
         outcome: 'Deployed live on Vercel Services (sin1 Singapore: React Vite UI + Go/Gin API) backed by Supabase PostGIS (79 stations, 183 real Bangkok condos & apartments from OpenStreetMap + curated landmarks, free OSM office place search) and Upstash Redis (~11–25 ms cache HIT vs ~27–53 ms PostGIS MISS). GitHub Actions CI runs transit fare/transfer unit tests plus real PostGIS & Redis integration tests with race detection and seed idempotency verification.',
         evidence: [
           { label: 'PostGIS & Redis CI in GitHub Actions', href: 'https://github.com/sing198/bangkok-commute-map/actions' },
@@ -27,13 +28,14 @@ const projectDetails = {
         limits: 'Building names and coordinates come from OpenStreetMap and curated Bangkok landmarks, while monthly rents are market-reference estimates for demo stability. A next step is integrating live rental listing feeds.',
       },
       th: {
-        role: 'พัฒนาคนเดียวทั้งระบบ: Go/Gin API, PostGIS Spatial DB, กราฟ Dijkstra คำนวณเส้นทางรถไฟฟ้า, Upstash Redis Cache และ React/TypeScript + Leaflet',
+        role: 'ผมทำแผนที่ด้วย React ระบบคำนวณเส้นทางด้วย Go และระบบค้นหาด้วย PostGIS พร้อมนำเว็บขึ้นใช้งาน',
         challenge: 'การค้นหาที่พักในกรุงเทพฯ แบบรัศมีวงกลมไม่ตรงกับความจริง เพราะเวลาและค่าใช้จ่ายขึ้นอยู่กับโครงข่าย BTS/MRT/ARL จุดเปลี่ยนสาย ค่าโดยสารแยกค่าย ส่วนต่อขยาย และระยะเดินถึงสถานี',
         decisions: [
           { title: 'ผสาน PostGIS GIST Index เข้ากับ Transit Graph (Dijkstra) ใน Go', detail: 'ใช้ PostGIS KNN (<->) บน GEOGRAPHY(Point, 4326) หาสถานีใกล้ออฟฟิศ 3 แห่งแรก และ ST_DWithin กรองที่พักเป็นเมตรจริง ร่วมกับ Dijkstra ใน Go บน 79 สถานี 166 เส้นเชื่อมที่คิดเวลาเปลี่ยนสาย (+3 นาทีในค่ายเดียวที่สยาม/เตาปูน, +6–7 นาทีข้ามค่ายพร้อมคิดค่าโดยสารแยกใบ) และส่วนต่อขยาย BTS (+15฿ cap 62฿)' },
           { title: 'จัดอันดับและเปรียบเทียบด้วย “ค่าครองชีพรวมจริงต่อเดือน”', detail: 'คำนวณค่าเช่า + ค่ารถไฟฟ้าไป-กลับ + ค่าวินมอเตอร์ไซค์อัตโนมัติเมื่อเกินระยะเดิน ตามจำนวนวันเข้าออฟฟิศ (เช่น Hybrid 12 วัน หรือ 22 วัน) พร้อมหน้าเทียบ 2–3 ทำเลข้างกันให้เห็นส่วนต่างเงินและชั่วโมงเดินทางต่อเดือน' },
           { title: 'แคชด้วย Upstash Redis แบบ Coordinate Quantization + ปักหมุด Region sin1', detail: 'ปัดพิกัดออฟฟิศความละเอียด ~100 เมตรเพื่อเพิ่ม Cache Hit Rate ปักหมุด Vercel Functions ไว้ที่สิงคโปร์ (sin1) คู่กับ Supabase PostGIS และ Upstash Redis ลดเวลาตอบกลับจาก ~2.2 วิ เหลือ ~11–25 ms เมื่อ HIT พร้อมแสดง header X-Cache บนหน้าจอและ fallback สู่ PostGIS ได้โดยไม่ล่ม' },
         ],
+        outcomeSummary: 'เว็บเปรียบเทียบที่พัก 183 แห่งบนโครงข่าย 79 สถานี โดย GitHub Actions ทดสอบค่าโดยสาร จุดเปลี่ยนสาย และการทำงานกับ PostGIS และ Redis',
         outcome: 'Deploy ใช้งานจริงบน Vercel Services (sin1 สิงคโปร์: React UI + Go/Gin API) เชื่อมต่อ Supabase PostGIS (79 สถานี, 183 คอนโดและอพาร์ตเมนต์จริงใน กทม. จาก OpenStreetMap + ชุด Curated พร้อมช่องค้นหาสถานที่ด้วย OSM ฟรี) และ Upstash Redis (HIT ~11–25 ms / PostGIS MISS ~27–53 ms) พร้อม GitHub Actions CI ที่รัน Unit Test กฎค่าโดยสาร/จุดเปลี่ยนสาย และ Integration Test บน PostGIS + Redis จริงพร้อม -race',
         evidence: [
           { label: 'ผลทดสอบ PostGIS & Redis บน GitHub Actions', href: 'https://github.com/sing198/bangkok-commute-map/actions' },
@@ -52,6 +54,7 @@ const projectDetails = {
     ],
     caseStudy: {
       en: {
+        role: 'I built checkout, stock reservations, and sandbox payment handling in Go.',
         challenge: 'Keep stock and key delivery consistent when buyers compete for the same item, the payment webhook retries, or a reservation expires.',
         decisions: [
           { title: 'Reserve stock in one transaction', detail: 'Combine duplicate cart items, lock product rows in ID order, and reserve stock within one database transaction.' },
@@ -69,6 +72,7 @@ const projectDetails = {
         limits: 'The local sandbox uses simulated payments and generated demo keys. A next step is integrating a payment provider and handling refunds.',
       },
       th: {
+        role: 'ผมใช้ Go ทำระบบสั่งซื้อ จองสต็อก และรับผลการชำระเงินในโหมดทดสอบ',
         challenge: 'รักษาความถูกต้องของสต็อกและการส่งคีย์ เมื่อหลายคนแย่งซื้อสินค้าชิ้นเดียวกัน เมื่อ webhook ส่งซ้ำ หรือเมื่อหมดเวลาจอง',
         decisions: [
           { title: 'จองสต็อกภายใน transaction เดียว', detail: 'รวมรายการสินค้าซ้ำ ล็อกแถวสินค้าตามลำดับ ID และจองสต็อกภายใน transaction เดียว' },
@@ -100,7 +104,7 @@ const projectDetails = {
     ],
     caseStudy: {
       en: {
-        role: 'Solo full-stack developer: React/TypeScript frontend, Go backend, WebSocket sync.',
+        role: 'I built the React board and the Go service that saves and syncs tasks over WebSocket.',
         challenge: 'An optimistic board can look saved even when the server rejects a change. Sending a whole task can also overwrite a teammate’s unrelated edit.',
         decisions: [
           { title: 'Confirm saves after database writes', detail: 'Send mutations with request IDs and match successful server events to the initiating client. Block disconnected edits and reload authoritative state after a rejected change.' },
@@ -114,7 +118,7 @@ const projectDetails = {
         limits: 'Next: scale beyond one backend instance with Redis Pub/Sub fan-out, add a durable offline queue, and extend field-level conflict checks to merge more edit types.',
       },
       th: {
-        role: 'พัฒนาคนเดียวทั้งระบบ: React/TypeScript, Go backend และการซิงค์ผ่าน WebSocket',
+        role: 'ผมทำกระดานงานด้วย React และบริการ Go ที่บันทึกและซิงค์งานผ่าน WebSocket',
         challenge: 'หน้าจอที่อัปเดตทันทีอาจดูเหมือนบันทึกแล้ว ทั้งที่เซิร์ฟเวอร์ปฏิเสธการเปลี่ยนแปลง และการส่งข้อมูลทั้งงานอาจเขียนทับส่วนที่เพื่อนร่วมทีมเพิ่งแก้',
         decisions: [
           { title: 'ยืนยันการบันทึกหลังฐานข้อมูลเขียนสำเร็จ', detail: 'ส่งการเปลี่ยนแปลงพร้อม request ID และจับคู่กับผลตอบกลับจากเซิร์ฟเวอร์ หยุดการแก้ไขเมื่อขาดการเชื่อมต่อ และโหลดข้อมูลจริงใหม่เมื่อการเปลี่ยนแปลงถูกปฏิเสธ' },

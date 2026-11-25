@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { Analytics } from '@vercel/analytics/react'
 import { EMAIL, GITHUB, translations } from './translations'
 import { getProjectDetails } from './projectDetails'
-import ProjectGallery from './components/ProjectGallery'
 import CaseStudyDialog from './components/CaseStudyDialog'
 import CopyButton from './components/CopyButton'
 import useCaseStudyRoute from './hooks/useCaseStudyRoute'
 
 const PROJECT_REPOS = translations.en.projects.map(project => project.repo)
+const FEATURED_PROJECT = 'bangkok-commute-map'
 
 function Arrow({ diagonal = false }) {
   return <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d={diagonal ? 'M6 18 18 6M6 6h12v12' : 'm9 5 7 7-7 7'} /></svg>
@@ -15,6 +15,31 @@ function Arrow({ diagonal = false }) {
 
 function SkillIcon({ index }) {
   return <svg aria-hidden="true" width="38" height="38" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.4">{index === 0 ? <><rect x="4" y="5" width="24" height="22" rx="4" /><path d="M4 12h24M12 12v15M8 8.5h.1m3 0h.1" /></> : index === 1 ? <><rect x="5" y="4" width="22" height="10" rx="3" /><rect x="5" y="18" width="22" height="10" rx="3" /><path d="M9 9h.1m0 14h.1M14 9h9m-9 14h9" /></> : <><ellipse cx="16" cy="7" rx="11" ry="4" /><path d="M5 7v18c0 5.3 22 5.3 22 0V7M5 16c0 5.3 22 5.3 22 0" /></>}</svg>
+}
+
+function ProjectCard({ project, caseStudyLabel, demoLabel, onOpen }) {
+  const isFeatured = project.repo === FEATURED_PROJECT
+
+  return <article className={`project${isFeatured ? ' project-featured' : ''}`} id={`project-${project.repo}`}>
+    <div className="project-intro">
+      <p className="project-role">{project.cardRole}</p>
+      <h3>{project.name}</h3>
+      <p className="project-lead">{project.cardSummary}</p>
+      <div className="project-links">
+        <button
+          type="button"
+          className={`case-study-trigger${isFeatured ? ' button button-small' : ''}`}
+          onClick={() => onOpen(project.repo)}
+          aria-haspopup="dialog"
+          aria-label={`${caseStudyLabel}: ${project.name}`}
+        >{caseStudyLabel}<Arrow /></button>
+        {isFeatured && <a className="text-link" href={project.demo} target="_blank" rel="noreferrer" aria-label={`${demoLabel}: ${project.name}`}>{demoLabel}<Arrow diagonal /></a>}
+      </div>
+    </div>
+    <div className="project-cover">
+      <img src={project.image} alt="" loading={isFeatured ? 'eager' : 'lazy'} />
+    </div>
+  </article>
 }
 
 function App() {
@@ -114,37 +139,28 @@ function App() {
     <main id="main">
       <section className="hero" id="home">
         <div className="hero-heading container">
-          <img className="hero-portrait" src="/profile.jpg" alt={t.hero.name} width="104" height="104" fetchPriority="high" />
-          <p className="hero-name">{t.hero.name}</p>
+          <div className="hero-profile">
+            <img className="hero-portrait" src="/profile.jpg" alt="" width="56" height="56" />
+            <div>
+              <p className="hero-name">{t.hero.name}</p>
+              <p className="hero-location">{t.hero.location}</p>
+            </div>
+          </div>
           <h1 lang="en">{t.hero.headline}</h1>
           <p className="hero-subtitle">{t.hero.description}</p>
           <div className="hero-actions">
             <a className="button" href="#projects">{t.hero.exploreBtn}</a>
             <a className="text-link" href="/Resume_Thanaphat_Khunphet.pdf" download>{c.resume}<Arrow /></a>
+            <span className="hero-availability"><i className="status-dot" aria-hidden="true" />{t.hero.availability}</span>
           </div>
-          <div className="hero-meta"><span className="hero-availability"><i className="status-dot" />{t.hero.availability}</span><span>{t.hero.location}</span></div>
         </div>
       </section>
       <section className="work-section section-space" id="projects">
         <div className="container">
-          <div className="section-heading reveal"><h2>{t.projectsSection.heading}</h2></div>
-          <div className="project-list">{projects.map(project => <article className={`project ${project.theme}`} id={`project-${project.repo}`} key={project.repo}>
-            <div className="project-intro reveal">
-              <h3>{project.name}</h3>
-              <p className="project-lead">{project.description}</p>
-              <div className="project-links">
-                <a className="button button-small" href={project.demo} target="_blank" rel="noreferrer" aria-label={`${t.projectsSection.liveDemo}: ${project.name}`}>{t.projectsSection.liveDemo}</a>
-                <button type="button" className="case-study-trigger" onClick={() => openCaseStudy(project.repo)} aria-haspopup="dialog" aria-label={`${c.caseStudy}: ${project.name}`}>{c.caseStudy}<Arrow /></button>
-                <a className="text-link" href={`${GITHUB}/${project.repo}`} target="_blank" rel="noreferrer" aria-label={`${t.projectsSection.sourceCode}: ${project.name}`}>{t.projectsSection.sourceCode}<Arrow /></a>
-              </div>
-              {project.demoNote && <p className="project-demo-note">{project.demoNote}</p>}
-            </div>
-            <div className="reveal"><ProjectGallery project={project} lang={lang} /></div>
-            <div className="project-information reveal">
-              <div><p>{project.context}</p>{project.contribution && <p className="project-contribution">{project.contribution}</p>}</div>
-              <ul className="tags" aria-label={t.projectsSection.techStackAria}>{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
-            </div>
-          </article>)}</div>
+          <div className="section-heading"><h2>{t.projectsSection.heading}</h2></div>
+          <div className="project-list">
+            {projects.map(project => <ProjectCard key={project.repo} project={project} caseStudyLabel={c.caseStudy} demoLabel={t.projectsSection.liveDemo} onOpen={openCaseStudy} />)}
+          </div>
         </div>
       </section>
       <section className="experience-section section-space" id="about"><div className="container"><div className="section-heading reveal"><h2>{t.experienceSection.heading}</h2></div><div className="experience-grid">{t.experienceSection.timeline.map(exp => <article className="experience-card reveal" key={exp.company}><div className="experience-date"><span>{exp.date}</span><span>{exp.badge}</span></div><p className="company">{exp.company}</p><h3>{exp.role}</h3><ul>{exp.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></article>)}<article className="education-card reveal"><img src="/profile.jpg" alt={t.hero.name} loading="lazy" /><div><p className="eyebrow">{c.education}</p><h3>{t.experienceSection.education.school}</h3><p>{t.experienceSection.education.major}</p><span>{t.experienceSection.education.period}</span></div></article></div></div></section>

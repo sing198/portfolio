@@ -28,13 +28,13 @@ export const translations = {
     projectsSection: {
       heading: 'Selected projects',
       liveDemo: 'Live demo',
-      sourceCode: 'Source code',
-      techStackAria: 'Tech stack',
     },
     projects: [
       {
         name: 'Bangkok Commute Map',
         context: 'Personal Project · Solo Developer',
+        cardRole: 'Solo full-stack developer',
+        cardSummary: 'Compare rent and commute costs across 183 Bangkok properties and 79 rail stations.',
         type: 'Spatial transit & cost finder',
         number: '01',
         theme: 'mint',
@@ -48,6 +48,8 @@ export const translations = {
       {
         name: 'DGKeys',
         context: 'Personal Project · Solo Developer',
+        cardRole: 'Solo developer · Checkout and inventory',
+        cardSummary: 'In a PostgreSQL test, one of 50 concurrent buyers reserved the last key.',
         type: 'E-commerce platform',
         number: '02',
         theme: 'peach',
@@ -60,6 +62,8 @@ export const translations = {
       {
         name: 'co-board',
         context: 'Personal Project · Solo Developer',
+        cardRole: 'Solo developer · Real-time collaboration',
+        cardSummary: 'Syncs tasks between tabs and confirms a save after the database write succeeds.',
         type: 'Real-time collaboration',
         number: '03',
         theme: 'mint',
@@ -73,6 +77,8 @@ export const translations = {
       {
         name: 'Community Land Management',
         context: 'University Senior Project · Team of 3',
+        cardRole: 'Front-end developer · Team of 3',
+        cardSummary: 'Built the Leaflet map and coordinate picker for land parcel registration.',
         contribution: 'My role: Front-end development with Vue 3 and Leaflet.',
         type: 'GIS & land management',
         number: '04',
@@ -173,13 +179,13 @@ export const translations = {
     projectsSection: {
       heading: 'ผลงานที่คัดมา',
       liveDemo: 'ลองใช้งาน',
-      sourceCode: 'ดูซอร์สโค้ด',
-      techStackAria: 'เทคโนโลยีที่ใช้',
     },
     projects: [
       {
         name: 'Bangkok Commute Map',
         context: 'โปรเจกต์ส่วนตัว · พัฒนาคนเดียว',
+        cardRole: 'พัฒนา Full-Stack คนเดียว',
+        cardSummary: 'เทียบค่าเช่าและค่าเดินทางของที่พัก 183 แห่ง โดยใช้โครงข่ายรถไฟฟ้า 79 สถานี',
         type: 'Spatial transit & cost finder',
         number: '01',
         theme: 'mint',
@@ -193,6 +199,8 @@ export const translations = {
       {
         name: 'DGKeys',
         context: 'โปรเจกต์ส่วนตัว · พัฒนาคนเดียว',
+        cardRole: 'พัฒนาคนเดียว · ระบบสั่งซื้อและสต็อก',
+        cardSummary: 'เทสต์บน PostgreSQL ด้วยผู้ซื้อ 50 คนพร้อมกัน จองคีย์สุดท้ายสำเร็จคนเดียว',
         type: 'E-commerce platform',
         number: '02',
         theme: 'peach',
@@ -205,6 +213,8 @@ export const translations = {
       {
         name: 'co-board',
         context: 'โปรเจกต์ส่วนตัว · พัฒนาคนเดียว',
+        cardRole: 'พัฒนาคนเดียว · กระดานงานเรียลไทม์',
+        cardSummary: 'ซิงค์งานระหว่างแท็บและแจ้งว่าบันทึกสำเร็จเมื่อเขียนลงฐานข้อมูลแล้ว',
         type: 'Real-time collaboration',
         number: '03',
         theme: 'mint',
@@ -218,6 +228,8 @@ export const translations = {
       {
         name: 'Community Land Management',
         context: 'โครงงานจบมหาวิทยาลัย · ทีม 3 คน',
+        cardRole: 'พัฒนา Front-end · ทีม 3 คน',
+        cardSummary: 'ทำแผนที่ Leaflet และตัวเลือกพิกัดสำหรับลงทะเบียนแปลงที่ดิน',
         contribution: 'บทบาทของผม: พัฒนา Front-end ด้วย Vue 3 และ Leaflet',
         type: 'GIS & land management',
         number: '04',
